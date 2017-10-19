@@ -26,7 +26,7 @@ public class Product {
     @Min(0)
     private float price;
 	
-	public Product() {
+	protected Product() {
 		;
 	}
 	
