@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	  <meta charset="utf-8"/>
+	  <title>List Products</title>
+	</head>
+	<body>		
+		<div class="service" th:unless="${#lists.isEmpty(productService)}">
+			<ul th:each="product : ${productService}">
+				<li>
+					<a th:href="@{'/product?code=' + ${product.code}}"> 
+						<span th:text="${product.name}" th:remove="tag"></span>
+					</a>
+					<a th:href="@{'/edit?code=' + ${product.code}}" th:text="'['+ #{edit} + ']'"></a> 
+					<a th:href="@{'/delete?code=' + ${product.code}}" th:text="'['+ #{delete} + ']'"></a> 
+				 </li>
+			</ul>
+		</div>
+		<p th:if="${#lists.isEmpty(productService)}" th:text="#{empty}"></p> 
+	</body>
+</html>

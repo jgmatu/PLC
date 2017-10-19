@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+		
+		<!-- Website Font style -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+			  
+		<script type="text/javascript" th:src="@{/js/form.js}"></script>	  
+
+	  <title>Hello world!!</title>
+	</head>
+	<body>
+		<form action="#" th:action="@{/add}" th:object="${product}" method="post">
+		 <table>
+                <tr>            
+                    <td>Code:</td>
+                    <td><input type="text" id="code" name="code" th:field="*{code}"/></td>
+                    <td th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Code Error</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name" name="name" th:field="*{name}"/></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                </tr>
+				<tr>
+					<td>Description:</td>
+					<td><input type="text" id="desc" name="desc" th:field="*{desc}"/></td>
+					<td th:if="${#fields.hasErrors('desc')}" th:errors="*{desc}">Description Error</td>
+				</tr>
+				<tr>
+					<td>Price:</td>
+					<td><input type="text" id="price" name="price" th:field="*{price}"/></td>
+					<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Description Error</td>
+				</tr>
+                <tr>
+                    <td><button type="submit">Confirm</button></td>
+                </tr>
+            </table>
+		</form>
+	</body>
+</html>
