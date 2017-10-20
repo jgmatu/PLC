@@ -1,4 +1,4 @@
-package es.urjc.javsan.master.configuration;
+package es.urjc.javsan.master.database;
 
 import java.util.Arrays;
 

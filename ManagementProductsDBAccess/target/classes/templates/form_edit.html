@@ -18,7 +18,7 @@
 	</head>
 	<body>
 	
-        <h3 th:text="${product.getCode()}"/>
+        <h3 th:text="'Code: ' + ${product.getCode()}"/>
 		<form action="#" th:action="@{/edit}" th:object="${product}" method="post">
 			<table>	
                 <tr>            

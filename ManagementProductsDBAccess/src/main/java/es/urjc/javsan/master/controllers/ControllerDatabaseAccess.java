@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import es.urjc.javsan.master.configuration.DatabaseProducts;
+
+import es.urjc.javsan.master.database.DatabaseProducts;
 import es.urjc.javsan.master.entities.Product;
 
 @Controller

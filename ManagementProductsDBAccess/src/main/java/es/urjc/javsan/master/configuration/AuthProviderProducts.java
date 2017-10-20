@@ -16,7 +16,7 @@ import es.urjc.javsan.master.entities.User;
 
 
 @Component
-public class AuthenticationProviderProducts implements AuthenticationProvider {
+public class AuthProviderProducts implements AuthenticationProvider {
 
     @Autowired
     private UserRepository userRepository;
