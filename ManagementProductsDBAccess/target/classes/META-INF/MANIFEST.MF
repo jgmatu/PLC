@@ -3,7 +3,7 @@ Implementation-Title: ManagementProducts
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: javi
 Implementation-Vendor-Id: com.example
-Build-Jdk: 1.8.0_144
+Build-Jdk: 1.8.0_151
 Implementation-URL: http://projects.spring.io/spring-boot/ManagementPr
  oducts/
 Created-By: Maven Integration for Eclipse

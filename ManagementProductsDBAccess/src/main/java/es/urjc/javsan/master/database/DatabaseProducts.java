@@ -34,7 +34,6 @@ public class DatabaseProducts {
 	}
 	
 	public void edit(Product product) {
-		customerRepository.delete(product.getCode());
 		customerRepository.save(product);
 	}
 	
