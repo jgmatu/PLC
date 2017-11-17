@@ -15,6 +15,7 @@ import es.urjc.master.practica.customers.FilmsRepository;
 import es.urjc.master.practica.customers.UserRepository;
 import es.urjc.master.practica.entities.Film;
 import es.urjc.master.practica.entities.User;
+import es.urjc.master.practica.services.FilmsRestService;
 
 @Controller
 public class VideoClubControllers {
@@ -22,6 +23,9 @@ public class VideoClubControllers {
 	@Autowired 
 	private FilmsRepository filmsDB; 
 
+	@Autowired
+	private FilmsRestService filmsService;
+	
 	@Autowired
 	private UserRepository usersDB;
 	
