@@ -1,0 +1,20 @@
+server: 
+  port: 8080    
+    
+spring:
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    encoding: UTF-8
+
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: create-drop
+          
+  datasource:
+    url: jdbc:mysql://localhost/VideoClub
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver

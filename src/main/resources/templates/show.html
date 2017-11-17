@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<title>Show Films</title>
+	</head>
+	<body>
+		<h1>Name Film</h1>
+		<iframe width="560" height="315" th:src=${video} frameborder="0" allowfullscreen></iframe>
+		<br/>
+		<a th:href="@{/home}">Come Back</a>
+	</body>
+</html>
