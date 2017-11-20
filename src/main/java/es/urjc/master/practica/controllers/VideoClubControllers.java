@@ -21,16 +21,17 @@ import es.urjc.master.practica.services.FilmsRestService;
 public class VideoClubControllers {
 	
 	@Autowired 
-	private FilmsRepository filmsDB; 
+	FilmsRepository filmsDB; 
 
 	@Autowired
-	private FilmsRestService filmsService;
+	FilmsRestService filmsService;
 	
 	@Autowired
-	private UserRepository usersDB;
+	UserRepository usersDB;
 	
 	@RequestMapping(value = {"/", "login"})
 	public ModelAndView login() {
+		filmsService.getFilm("");
 		return new ModelAndView("login");
 	}
 	
@@ -64,15 +65,9 @@ public class VideoClubControllers {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management")
-	public ModelAndView management() {
-		return new ModelAndView("manegment");
-	}	
-	
-	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/films")
 	public ModelAndView managementFilms() {
-		return new ModelAndView("manegment_films");
+		return new ModelAndView("management_films");
 	}
 
 	@Secured("ROLE_ADMIN")

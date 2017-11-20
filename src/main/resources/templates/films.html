@@ -50,8 +50,8 @@
 		</div>
 		
 		<ul> 
-			<li sec:authorize="hasRole('ROLE_ADMIN')"><a id="management" href="/management/users""> Management Users </a></li>
-			<li sec:authorize="hasRole('ROLE_ADMIN')"><a id="management" href="/management/films""> Management Films </a></li>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users"> Management Users </a> </li>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films"> Management Films </a> </li>
 		</ul>
 		
 		<form th:action="@{/logout}" method="post">

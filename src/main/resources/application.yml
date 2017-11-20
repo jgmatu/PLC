@@ -4,14 +4,13 @@ server:
 spring:
 
   thymeleaf:
-    mode: LEGACYHTML5
     cache: false
     encoding: UTF-8
 
   jpa:
     database: MYSQL
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
           
   datasource:
     url: jdbc:mysql://localhost/VideoClub

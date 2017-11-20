@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Management Films</title>
@@ -17,34 +17,6 @@
 			
 			Listar películas para borrarlas.
 		</p>
-		 <form action="#" th:action="@{/management/users}" th:object="${user}" method="post">
-			 <table>
-	                <tr>            
-	                    <td>Name</td>
-	                    <td><input type="text" id="code" name="code" th:field="*{code}"/></td>
-	                    <td th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Code Error</td>
-	                </tr>
-	                <tr>
-	                    <td>Password</td>
-	                    <td><input type="password" id="password" name="password" th:field="*{password}"/></td>
-	                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
-	                </tr>
-	                <tr>
-	                    <td>Confirm Password</td>
-	                    <td><input type="password" id="passwordConfirm" name="passwordConfirm"/></td>
-	                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
-	                </tr>
-					<tr>
-						<td>Email:</td>
-						<td><input type="text" id="email" name="email" th:field="*{email}"/></td>
-						<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
-					</tr>
-	                <tr>
-	                    <td><button type="submit">Confirm</button></td>
-	                    <td><button type="reset">Clear</button></td>
-	                </tr>
-	            </table>
-			</form>		
-			<a th:href="@{/home}">Back</a>
+		<a th:href="@{/home}">Back</a>
 	</body>
 </html>

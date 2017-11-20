@@ -26,6 +26,7 @@ public class User {
     private String email;
     private String password;
     
+    
     @ElementCollection(fetch = FetchType.EAGER)
     private List<GrantedAuthority> roles;
 
