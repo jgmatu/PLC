@@ -3,6 +3,14 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
+        
+        <script type="application/javascript">
+        	$(document).ready(function() {
+        		console.log("Hello world!!");
+        	});
+        </script>
+        
 		<title>Management Films</title>
 	</head>
 	<body>
@@ -16,7 +24,63 @@
 			Borrar la película.
 			
 			Listar películas para borrarlas.
-		</p>
+		</p>	
+			
+		  <form th:if="${hidden}" action="#" th:action="@{/management/films/search}" method="post">
+			 <table>
+	                <tr>            
+	                    <td>Title</td>
+	                    <td><input type="text" id="title" name="title"/></td>
+	                </tr>
+	                <tr>
+	                    <td>URL</td>
+	                    <td><input type="text" id="url" name="url"/></td>
+	                </tr>	            
+	                <tr>
+	                    <td><button type="submit">Auto Complete</button></td>
+	                </tr>	                
+	            </table>
+			</form>
+	
+		  <form th:if="${not hidden}" action="#" th:action="@{/management/films/create}" method="post">	
+             <table>	        
+	                <tr>            
+	                    <td>Title</td>
+		                <td><h6 th:text="${film.Title}" id="description"></h6></td>
+	                </tr>
+	                <tr>
+	                    <td>Poster</td>
+		                <td><img th:src="${film.Poster}" id="description"/></td>
+	                </tr>	            
+
+	            <tr>
+	                <td>Description</td>
+	                <td><h6 th:text="${film.Plot}" id="description"></h6></td>
+	            </tr>
+	            <tr>
+	                <td>Actors</td>
+	                <td><h6 th:text="${film.Actors}" id="actors"></h6></td>
+	            </tr>
+	            <tr>
+	                <td><button type="submit">Confirm</button></td>
+	            </tr>	                
+	            	            	<!-- Image poster...  
+	                <tr>
+	                    <td>Poster</td>
+	                    <td><img th:src="${film.Poster}"/></td>
+	                </tr>
+					-->
+					<!-- Ratings   
+	                <tr>
+	                    <td></td>
+	                    <td><input type="text" id="url" name="url"/></td>
+	                </tr>
+	                 -->
+	            
+			</table>
+            
+		</form>
+	
 		<a th:href="@{/home}">Back</a>
 	</body>
 </html>

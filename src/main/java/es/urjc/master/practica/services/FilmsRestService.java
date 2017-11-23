@@ -3,19 +3,20 @@ package es.urjc.master.practica.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import es.urjc.master.practica.entities.Film;
-import es.urjc.master.practica.models.CommonResponse;
+import es.urjc.master.practica.services.client.FeignFilmsClient;
 
 @Service
 public class FilmsRestService implements FilmsService<Film, String> {
 
+	private static final String API_KEY = "3bdc1f9c";
+	
 	@Autowired 
-	RestTemplate restTemplate;
+	FeignFilmsClient feignFilms;
 	
 	@Override
-	public CommonResponse<Film> getFilm(String title) {
-		return null;
+	public Film getFilm(String title) {
+		return feignFilms.findOne(title, API_KEY);
 	}
 }

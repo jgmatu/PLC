@@ -31,7 +31,6 @@ public class VideoClubControllers {
 	
 	@RequestMapping(value = {"/", "login"})
 	public ModelAndView login() {
-		filmsService.getFilm("");
 		return new ModelAndView("login");
 	}
 	
@@ -67,14 +66,40 @@ public class VideoClubControllers {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/films")
 	public ModelAndView managementFilms() {
-		return new ModelAndView("management_films");
+		return new ModelAndView("management_films")
+				.addObject("film", new Film()).addObject("hidden", true);
 	}
 
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "management/films/search", method = RequestMethod.POST)
+	public ModelAndView managementFilms(@RequestParam String title, @RequestParam String url) {
+		
+		if (filmsDB.exists(title)) {
+			System.out.println("The film already exist...");
+		}
+		System.out.println(title);
+		System.out.println(url);
+		Film film = filmsService.getFilm(title);
+		System.out.println(film.toString());
+		
+		return new ModelAndView("management_films")
+				.addObject("film", film).addObject("hidden", false);
+	}
+
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "management/films/create", method = RequestMethod.POST)
+	public ModelAndView managementFilmsCreate(@Valid Film film) {
+		System.out.println("Create film..." + film.toString());
+		return new ModelAndView("management_films")
+				.addObject("film", film).addObject("hidden", false);
+	}
+
+	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/users", method = RequestMethod.GET)
 	public ModelAndView managmenetUsers() {
 		return new ModelAndView("management_users")
-				.addObject("user", new User()).addObject("admin", false);
+				.addObject("user", new User()).addObject("admin", true);
 	}
 	
 	@Secured("ROLE_ADMIN")

@@ -1,4 +1,4 @@
-package es.urjc.master.practica.configuration;
+package es.urjc.master.practica.configurations;
 
 import java.util.List;
 

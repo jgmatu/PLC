@@ -1,7 +1,11 @@
 package es.urjc.master.practica.entities;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,39 +14,48 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Film {
-
-	public enum Value {WORSE, BAD, NORMAL, GOOD, INCREDIBLE};
 	
 	@Id
-	private String name;
+    @JsonProperty("Title")
+	private String Title;
 	
-	private String video;
-	private String description;
-	private int year;
-	private String director;
-	private String reparto;
-	private String portada;
-	private Value value;
+    @JsonProperty("Plot")
+    private String Plot;
 
-	
-	public Film(String name, String video, String description, int year, String director, String reparto, String portada, Value value) {
-		this.name = name;
-		this.video = video;
-		this.description = description;
-		this.year = year;
-		this.director = director;
-		this.reparto = reparto;
-		this.portada = portada;
-		this.value = value;
+    @JsonProperty("Year")
+	private String Year;
+    
+    @JsonProperty("Director")
+    private String Director;
+
+    @JsonProperty("Actors")
+    private String Actors;
+    
+    @JsonProperty("Poster")
+    private String Poster;
+
+    @JsonProperty("Ratings")
+    private ArrayList<Rating> Ratings;
+
+	public Film(String Title, String video, String description, String year, String director, String reparto, String portada, ArrayList<Rating> Ratings) {
+		this.Title = Title;
+		this.Ratings = new ArrayList<Rating>();
 	}
 
-	protected Film() {
+	public Film() {
 		;
 	}
-	
-	
+		
 	@Override
 	public String toString() {
-		return "";
+		StringBuffer format = new StringBuffer();
+
+		format.append(String.format("Title : %s Year: %s Director: %s Actors: %s"
+				+ "Poster: %s\n", Title, Year, Director, Actors, Poster));
+
+		for (Rating r: Ratings) {
+			format.append(String.format("\t%s", r.toString()));
+		}		
+		return format.toString();
 	}
 }
