@@ -1,8 +1,11 @@
 package es.urjc.master.practica.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,7 +38,8 @@ public class Film {
     private String Poster;
 
     @JsonProperty("Ratings")
-    private ArrayList<Rating> Ratings;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Rating> Ratings;
 
 	public Film(String Title, String video, String description, String year, String director, String reparto, String portada, ArrayList<Rating> Ratings) {
 		this.Title = Title;
@@ -43,7 +47,7 @@ public class Film {
 	}
 
 	public Film() {
-		;
+		this.Ratings = new ArrayList<Rating>();
 	}
 		
 	@Override

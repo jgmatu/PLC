@@ -21,13 +21,13 @@ import es.urjc.master.practica.services.FilmsRestService;
 public class VideoClubControllers {
 	
 	@Autowired 
-	FilmsRepository filmsDB; 
+	private FilmsRepository filmsDB; 
 
 	@Autowired
-	FilmsRestService filmsService;
+	private FilmsRestService filmsService;
 	
 	@Autowired
-	UserRepository usersDB;
+	private UserRepository usersDB;
 	
 	@RequestMapping(value = {"/", "login"})
 	public ModelAndView login() {
@@ -71,29 +71,19 @@ public class VideoClubControllers {
 	}
 
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management/films/search", method = RequestMethod.POST)
-	public ModelAndView managementFilms(@RequestParam String title, @RequestParam String url) {
-		
-		if (filmsDB.exists(title)) {
-			System.out.println("The film already exist...");
-		}
-		System.out.println(title);
-		System.out.println(url);
-		Film film = filmsService.getFilm(title);
-		System.out.println(film.toString());
-		
-		return new ModelAndView("management_films")
-				.addObject("film", film).addObject("hidden", false);
-	}
-
-	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/films/create", method = RequestMethod.POST)
-	public ModelAndView managementFilmsCreate(@Valid Film film) {
-		System.out.println("Create film..." + film.toString());
-		return new ModelAndView("management_films")
-				.addObject("film", film).addObject("hidden", false);
+	public ModelAndView managementFilmsCreate(@RequestParam String title, @RequestParam String url) {
+		if (filmsDB.exists(title)) {
+			return new ModelAndView("management_create")
+					.addObject("result", "Film Already Exist")
+					.addObject("film", filmsDB.findOne(title));
+		}	
+		Film film = filmsService.getFilm(title);
+		filmsDB.save(film);
+		return new ModelAndView("management_create")
+				.addObject("result", "Film Added!!!")
+				.addObject("film", film);
 	}
-
 	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/users", method = RequestMethod.GET)

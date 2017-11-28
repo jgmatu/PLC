@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+			type="application/javascript"></script>
+		
+			<script type="application/javascript">
+		      	$(document).ready(function() {
+		      		console.log("Hello world!!");
+		      	});	
+			</script>
+		
+		<title>Management Films</title>
+	</head>
+	<body>
+		<form action="#" th:action="@{/management/films/confirm}" method="get">
+			<table>
+				<tr>
+					<td>Title</td>
+					<td><h6 th:text="${film.Title}"></h6></td>
+					<td><input type="hidden" th:field="${film.Title}"/></td>
+				</tr>
+		
+				<tr>
+					<td>Year</td>
+					<td><h6 th:text="${film.Year}"></h6></td>
+					<td><input type="hidden" th:field="${film.Year}"/></td>
+				</tr>
+		
+				<tr>
+					<td>Director</td>
+					<td><h6 th:text="${film.Director}"></h6></td>
+					<td><input type="hidden" th:field="${film.Director}"/></td>
+				</tr>
+		
+				<tr>
+					<td>Poster</td>
+					<td><img th:src="${film.Poster}" /></td>
+					<td><input type="hidden" th:field="${film.Poster}"/></td>
+				</tr>
+		
+				<tr>
+					<td>Description</td>
+					<td><h6 th:text="${film.Plot}"></h6></td>
+					<td><input type="hidden" th:field="${film.Plot}"/></td>
+				</tr>
+				<tr>
+					<td>Actors</td>
+					<td><h6 th:text="${film.Actors}"></h6></td>
+					<td><input type="hidden" th:field="${film.Actors}"/></td>
+				</tr>
+				<tr>
+					<td>Ratings</td>
+					<td><input type="hidden" th:field="${film.Ratings}"/></td>
+				</tr>
+				<tr th:each="rating : ${film.Ratings}">
+					<td>
+						<h6 th:text="${rating.Source}"></h6>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p th:text="${result}"> </p>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
