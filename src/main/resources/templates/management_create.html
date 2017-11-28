@@ -16,7 +16,7 @@
 		<title>Management Films</title>
 	</head>
 	<body>
-		<form action="#" th:action="@{/management/films/confirm}" method="get">
+		<form action="#" th:action="@{/management/films/confirm}" method="post">
 			<table>
 				<tr>
 					<td>Title</td>
@@ -64,6 +64,11 @@
 				<tr>
 					<td>
 						<p th:text="${result}"> </p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button type="submit" value="Confirm"></button>
 					</td>
 				</tr>
 			</table>

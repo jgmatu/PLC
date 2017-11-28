@@ -10,4 +10,5 @@ public interface FeignFilmsClient {
 	
     @RequestLine("GET /?t={name}&apiKey={apiKey}")
     Film findOne(@Param("name") String name, @Param("apiKey") String apiKey);
+    
 }
