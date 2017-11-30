@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1"/>
+	<link th:href="@{/css/estilos.css}" rel="stylesheet"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<script type="text/javascript" th:src="@{/js/validacion.js}"></script>
+	<title th:text="#{storep}"></title>
+</head>
+
+<body>
+	<div class="headerP">
+		<h1 th:text="#{storep}"></h1>	
+		<div class="lan">	
+			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a> 
+			<p><h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5></p>	
+			<form th:action="@{/logout}" method="post">
+				<input id="btsingout" type="submit" th:value="#{singout}"/>
+			</form>				
+		</div>					
+	</div>
+	
+	
+	<div class="rowP">
+		<div class="col-3 menu">
+			<ul>
+				<li><a href="/" th:text="#{home}"></a></li>
+				<li><a href="/productos" th:text="#{listprod}"></a></li>
+			</ul>
+		</div>
+		
+		<div class="col-9">
+			<h2 th:text="#{newprod}"></h2>
+			
+		    <form id="formnuevo" th:object="${producto}" th:action="@{/producto}" method="post">
+		        <div class="newpform">
+		            <input type="hidden" th:field="*{codigo}"/>
+		            <label for="idname" th:text="#{name}"></label><br/>
+		            <input type="text" id="idname" th:field="*{nombre}"/><br/><br/>
+		            <label for="idescri" th:text="#{description}"></label><br/>
+		            <input type="text" id="idescri" th:field="*{descripcion}"/><br/><br/>
+		            <label for="idpre" th:text="#{price}"></label><br/>
+		            <input type="text" id="idpre" th:field="*{precio}"/><br/><br/>
+					<input id="btnvalida" onClick="btnvalida()" type="submit" th:value="#{save}"></input>
+				 </div>	
+		    </form> 
+		</div>
+	</div>
+</body>
+</html>
+
+

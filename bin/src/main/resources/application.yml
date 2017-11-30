@@ -13,7 +13,7 @@ spring:
       ddl-auto: create-drop
           
   datasource:
-    url: jdbc:mysql://localhost:3306/VideoClub
+    url: jdbc:mysql://localhost/VideoClub
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
