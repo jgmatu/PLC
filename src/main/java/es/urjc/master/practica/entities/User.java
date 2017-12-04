@@ -46,17 +46,21 @@ public class User {
     }
     
     public void setAdmin() {
-		this.roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"), new SimpleGrantedAuthority("ROLE_ADMIN"));
+        GrantedAuthority[] adminRoles = { new SimpleGrantedAuthority("ROLE_ADMIN") };
+    	
+        this.roles = Arrays.asList(adminRoles);
     }
     
     public void setUser() {
-		this.roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));    	
+    	GrantedAuthority[] userRoles = { new SimpleGrantedAuthority("ROLE_USER") };
+    	
+    	this.roles = Arrays.asList(userRoles);    	
     }
     
-
     @Override
     public String toString() {
-    	return String.format("User: %s, Email : %s", this.name, this.email);
+    	return String.format("User: %s, Email : %s Role : %s", this.name, this.email,
+    			this.roles.toString());
     }
     
 	@Override

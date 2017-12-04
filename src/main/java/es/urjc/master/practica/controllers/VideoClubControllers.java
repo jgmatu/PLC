@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import es.urjc.master.practica.customers.FilmsRepository;
 import es.urjc.master.practica.customers.UserRepository;
 import es.urjc.master.practica.entities.Film;
@@ -84,9 +85,7 @@ public class VideoClubControllers {
 		return new ModelAndView("management_create")
 				.addObject("result", "Film Added!!!")
 				.addObject("film", film);
-	}
-	
-	
+	}	
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/management/films/confirm", method = RequestMethod.POST)
@@ -98,28 +97,6 @@ public class VideoClubControllers {
 			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
 		}	
 	}
-	
-	
-	/*
-	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management/users", method = RequestMethod.GET)
-	public ModelAndView managmenetUsers() {
-		return new ModelAndView("management_users")
-				.addObject("user", new User()).addObject("admin", true);
-	}
-	
-	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management/users", method = RequestMethod.POST)
-	public ModelAndView createUser(@Valid User user, boolean admin) {
-		if (admin) {
-			user.setAdmin();
-		} else {
-			user.setUser();
-		}
-		usersDB.save(user);
-		return new ModelAndView("films");
-	}
-	}*/
 	
 	@RequestMapping(value = "/create/user", method = RequestMethod.GET)
 	public ModelAndView createUser() {
@@ -134,7 +111,6 @@ public class VideoClubControllers {
 		return "login";
 	}
 
-	
 	@Secured("ROLE_ADMIN")
     @RequestMapping("/management/users")
 	public String listusers(Model model){
@@ -157,17 +133,17 @@ public class VideoClubControllers {
 	}
 
 	@Secured({"ROLE_ADMIN"})
-	@RequestMapping("/user/update")
-	public String updateAdmin(@Valid User user,  boolean checkadmin) {
+	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	public String updateAdmin(Model model, String name, boolean checkadmin) {
+		User user = usersDB.findOne(name);
+		usersDB.delete(user);		
 		if (checkadmin) {
 			user.setAdmin();
 		} else {
 			user.setUser();
 		}
 		usersDB.save(user);
-		return "management_users";
+		model.addAttribute("users", usersDB.findAll());
+        return "management_users";
 	}
-
-	
-
 }

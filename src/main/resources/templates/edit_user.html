@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<meta charset="utf-8"/>
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
@@ -38,21 +39,17 @@
 		<div class="col-9">
 			<h2 th:text="#{edituser}"></h2>
 				
-		    <form id="formeditar" th:object="${user}" th:action="@{/user/update}" method="post">
+		    <form id="formeditar" th:action="@{/user/update}" method="post">
 		        <div class="newpform">
-		            
-		            
-		            <label for="idname" th:text="#{name}"></label><br/>
-		            <input type="text" id="idname" th:value="*{name}" th:field="*{name}"/><br/><br/>
+		           
+		            <label for="name" th:text="#{name}" ></label><br/>
+		            <input type="text" id="name" name="name" th:value="${user.name}"/><br/><br/>
 		            
 		            <label for="iemail" th:text="#{email}"></label><br/>
-		            <input type="text" id="email" th:value="*{email}" th:field="*{email}"/><br/><br/>
-		            
-		            <label for="irole" th:text="#{roles}"></label><br/>
-		            <input type="text" id="iroles" th:value="*{roles}" th:field="*{roles}"/><br/><br/>
+		            <input type="text" id="email"/><br/><br/>
 		            
 		            <label for="irole" th:text="#{admin}"></label><br/>
-					<input type="checkbox" name="checkadmin" th:object="${checkadmin}"/><br/><br/>
+					<input type="checkbox" name="checkadmin"/><br/><br/>
 
 					<input type="submit" th:value="#{save}"></input>
 				 </div>	

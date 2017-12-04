@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<meta charset="utf-8"/>
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
@@ -16,9 +17,6 @@
 			</div>
 			<div class="Hi">	
 				<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
-				<!-- <form th:action="@{/logout}" method="post">
-					<input id="btsingout" type="submit" th:value="#{singout}"/>
-				</form>  -->	  			
 			</div>					
 		</div>
 	
@@ -35,8 +33,7 @@
 				<h2 th:text="#{listuser}"></h2>
 			    <div class="newpform" th:if="${not #lists.isEmpty(users)}">     
 			        <table class="tablelist">
-			            <tr>
-			                
+			            <tr>			                
 			                <th th:text="#{name}"></th>
 			                <th th:text="#{email}"></th>
 			                <th th:text="#{roles}"></th> 
