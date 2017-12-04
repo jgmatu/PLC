@@ -33,57 +33,67 @@
 			</div>
 		<div class="col-9">
 					<h2 th:text="#{addfilm}"></h2>
-					
-					
-				
-				    <form id="formeditar" action="#" th:action="@{/management/films/confirm}" method="post">
+
+				    <form id="formeditar" action="#" th:action="@{/home}" method="post">
 				    
 				       <div class="newpform">
 				        <table class="tablelist">
+
 							<tr>
+								<!-- <td>Poster</td>   -->
+								<td rowspan="7" ><img th:src="${film.Poster}"/></td>
+							</tr>	
+										        
+							<tr>
+								<td></td>
 								<td>Title</td>
 								<td><h6 th:text="${film.Title}"></h6></td>
 							</tr>
 					
 							<tr>
+								<td></td>
 								<td>Year</td>
 								<td><h6 th:text="${film.Year}"></h6></td>
 							</tr>
 					
 							<tr>
+								<td></td>
 								<td>Director</td>
 								<td><h6 th:text="${film.Director}"></h6></td>
 							</tr>
-					
+
 							<tr>
-								<td>Poster</td>
-								<td rowspan="11" ><img th:src="${film.Poster}" /></td>
-							</tr>
-					
-							<tr>
+								<td></td>
 								<td>Description</td>
 								<td><h6 th:text="${film.Plot}"></h6></td>		
 							</tr>
 							<tr>
+								<td></td>
 								<td>Actors</td>
 								<td><h6 th:text="${film.Actors}"></h6></td>
 							</tr>
-							<tr>
+							<!-- <tr>
+								<td></td>
 								<td>Ratings</td>
 								<td></td>
 							</tr>
+								
 							<tr th:each="rating : ${film.Ratings}">
+								<td></td>
 								<td><h6 th:text="${rating.Source}"></h6></td>
 								<td></td>
-							</tr>
+							</tr>  -->
 							<tr>
+								<td></td>
 								<td><h6 th:text="${result}"></h6></td>
 								<td></td>
 							</tr>
 							<tr>
+								<td></td>
 								<td colspan="2">
 									<input type="submit" th:value="#{confirm}"></input>
 								</td>
+								<td></td>
 							</tr>
 						</table>
 

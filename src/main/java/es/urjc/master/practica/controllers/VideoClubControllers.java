@@ -41,12 +41,12 @@ public class VideoClubControllers {
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@RequestMapping(value = "/home", method= RequestMethod.GET)
+	@RequestMapping("/home")
 	public ModelAndView search() {
 		return new ModelAndView("films").addObject("films", filmsDB.findAll());
 	}
 
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	/*@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ModelAndView resultSearch(@RequestParam String name) {
 		Film film = filmsDB.findOne(name);
@@ -56,7 +56,7 @@ public class VideoClubControllers {
 		} else {
 			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
 		}
-	}	
+	}	*/
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "show")
@@ -88,16 +88,19 @@ public class VideoClubControllers {
 	
 	
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	/*@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/management/films/confirm", method = RequestMethod.POST)
 	public ModelAndView confirmHome(@RequestParam String Title) {
+		return new ModelAndView("/home");			
+
+	}
 		Film film = filmsDB.findOne(Title);
 		if (film == null) {
 			return new ModelAndView("films"); 
 		} else {
 			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
 		}	
-	}
+	}*/
 	
 	
 	/*

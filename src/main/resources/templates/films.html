@@ -56,10 +56,10 @@
 							<th th:text="#{title}"></th>
 							<th th:text="#{year}"></th>
 							<th th:text="#{director}"></th>
-							<th th:text="#{poster}"></th>
 							<th th:text="#{description}"></th>
 							<th th:text="#{actors}"></th>
 							<th th:text="#{rating}"></th>
+							<th th:text="#{poster}"></th>
 						</tr>
 						 <tr th:each="film : ${films}">
 								<td><h6 th:text="${film.Title}"></h6></td>
@@ -68,13 +68,15 @@
 
 								<td><h6 th:text="${film.Director}"></h6></td>
 
-								<td><h6 th:src="${film.Poster}"></h6></td>
-
 								<td><h6 th:text="${film.Plot}"></h6></td>		
 
 								<td><h6 th:text="${film.Actors}"></h6></td>
 								
-								<td><h6>Rating</h6></td>
+								<td><h6></h6>Ratings</td>
+								<!-- <td><h6 th:text="${film.Ratings}"></h6></td>  -->
+
+								<td><img th:src="${film.Poster}"/></td>
+
 							</tr>
 					</table> 
 				</div> 		  	    	  
