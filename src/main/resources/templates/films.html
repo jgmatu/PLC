@@ -1,62 +1,115 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Menu Films</title>
-	</head>
-	<body>	
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	  <meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+	  
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
+      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
 
-<!--  		<h1 id="logged">
-		    Hello <span sec:authentication="user"></span>
-		</h1>
--->
-
-		<form action="#" th:action="@{/home}" method="post">
-			<table>
-				<tr>            
-				    <td><input type="text" id="name" name="name"/></td>                    
-                    <td><button type="submit">Search</button></td>
-				</tr>
-			</table>
-		</form>
-		
-		<!-- Search Result -->
-		<div class="service" th:unless="${#lists.isEmpty(films)}">
-			<table>
-				<tr>
-
-					<th> Name </th>
-					<th> Video </th>
-					<th> Description </th>
-					<th> Year </th>
-					<th> Director </th>
-					<th> Reparto </th>
-					<th> Portada</th>
-					<th> Value </th>
-
-				</tr>
-				
-				<tr th:each="film : ${films}">
-					<td th:text="${film.name}">This is a film</td>
-					<td><a th:href="'show?video=' + ${film.video}">Ver Pelicula</a></td>
-					<td th:text="${film.description}">This is a film</td>
-					<td th:text="${film.year}">This is a film</td>
-					<td th:text="${film.director}">This is a film</td>
-					<td th:text="${film.reparto}">This is a film</td>
-					<td th:text="${film.portada}">This is a film</td>
-					<td th:text="${film.value}">This is a film</td>
-				</tr>
-			</table> 
+   </head>
+	<body>
+	<div class="headerP">
+		<h1 th:text="#{storep}"></h1>	
+		<div class="lan">	
+			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
 		</div>
-		
-		<ul> 
-			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users"> Management Users </a> </li>
-			<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films"> Management Films </a> </li>
-		</ul>
-		
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
-		</form>
+		<div class="Hi">	
+			<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
+			<!-- <form th:action="@{/logout}" method="post">
+				<input id="btsingout" type="submit" th:value="#{singout}"/>
+			</form>  -->	  			
+		</div>					
+	</div>
+	
+		<div class="rowP">
+			<div class="col-2 menu">
+				<ul>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
+					<li><a href="/logout" th:text="#{singout}" ></a> </li>
+				</ul>
+			</div>
+			<div class="col-10">
+			  	<h2 th:text="#{search}"></h2>
+				<form action="#" th:action="@{/home}" method="post">
+					<table>
+						<tr>            
+						    <td><input type="text" id="name" name="name"/></td>                    
+		                    <td><input type="submit" th:value="#{search}"/></td>
+						</tr>
+					</table>
+				</form>
 				
+				<!-- Search Result -->
+				<!-- <div th:unless="${#lists.isEmpty(films)}">
+					<table> -->
+
+				<h2 th:text="#{listfilms}"></h2>		
+				<div class="newpform" th:if="${not #lists.isEmpty(films)}">     
+			        <table class="tablelist">
+						<tr>
+							<th th:text="#{title}"></th>
+							<th th:text="#{year}"></th>
+							<th th:text="#{director}"></th>
+							<th th:text="#{poster}"></th>
+							<th th:text="#{description}"></th>
+							<th th:text="#{actors}"></th>
+							<th th:text="#{rating}"></th>
+						</tr>
+						 <tr th:each="film : ${films}">
+								<td><h6 th:text="${film.Title}"></h6></td>
+
+								<td><h6 th:text="${film.Year}"></h6></td>
+
+								<td><h6 th:text="${film.Director}"></h6></td>
+
+								<td><h6 th:src="${film.Poster}"></h6></td>
+
+								<td><h6 th:text="${film.Plot}"></h6></td>		
+
+								<td><h6 th:text="${film.Actors}"></h6></td>
+								
+								<td><h6>Rating</h6></td>
+							</tr>
+					</table> 
+				</div> 		  	    	  
+			</div>
+		</div>		
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+						<!-- <tr>
+							<th> Name </th>
+							<th> Video </th>
+							<th> Description </th>
+							<th> Year </th>
+							<th> Director </th>
+							<th> Reparto </th>
+							<th> Portada</th>
+							<th> Value </th>
+						</tr>
+						    <tr th:each="film : ${films}">
+							<td th:text="${film.name}">This is a film</td>
+							<td><a th:href="'show?video=' + ${film.video}">Ver Pelicula</a></td>
+							<td th:text="${film.description}">This is a film</td>
+							<td th:text="${film.year}">This is a film</td>
+							<td th:text="${film.director}">This is a film</td>
+							<td th:text="${film.reparto}">This is a film</td>
+							<td th:text="${film.portada}">This is a film</td>
+							<td th:text="${film.value}">This is a film</td>
+						</tr> -->
+						
+						

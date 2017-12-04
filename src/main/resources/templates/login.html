@@ -1,38 +1,33 @@
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-	  <meta charset="ISO-8859-1"/>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
 	  
-	  <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
-	  
-      <link rel="stylesheet" href="/css/login.css" type="text/css"/>
-      
       <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
 	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
 
-      <title th:text="#{storep}"></title>
    </head>
 	<body>
 	
 		<div class="headerP">
 			<h1 th:text="#{storep}"></h1>	
 			<div class="lan">	
-				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
-				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+				<a href="?lang=es"><img src="/images/es.png" class="iconolan" alt="ES"/></a>
+				<a href="?lang=en"><img src="/images/en.png" class="iconolan" alt="EN"/></a>  			
 			</div>					
 		</div>
 	
 		<div class="rowP">
-			<div class="col-3 menu">
+			<div class="col-2 menu">
 				<ul>
-					<li><a href="/" th:text="#{home}"></a></li>
-					<li><a href="/" th:text="#{createu}"></a></li>
+					<li><a th:href="@{/create/user}" th:text="#{createu}"></a></li>
 				</ul>
 			</div>
-			<div class="col-9">
+			<div class="col-10">
 			  <h2 th:text="#{login}"></h2>
 			  
 			    <form id="formnuevo" role="form" th:action="@{/login}" method="post">

@@ -1,4 +1,85 @@
-<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+	  
+   </head>
+	<body>
+	
+		<div class="headerP">
+			<h1 th:text="#{storep}"></h1>	
+			<div class="lan">	
+				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+			</div>
+			<div class="Hi">	
+				<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
+				<!-- <form th:action="@{/logout}" method="post">
+					<input id="btsingout" type="submit" th:value="#{singout}"/>
+				</form>  -->	  			
+			</div>					
+		</div>
+	
+		<div class="rowP">
+			<div class="col-2 menu">
+				<ul>
+					<li><a th:href="@{/home}" th:text="#{home}"></a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
+					<li><a href="/logout" th:text="#{singout}" ></a> </li>
+				</ul>
+			</div>
+		<div class="col-9">
+					<h2 th:text="#{addfilm}"></h2>
+				
+				    <form id="formeditar" action="#" th:action="@{/management/films/create}" method="post">
+				    
+				        <div class="newpform">
+				        
+				            <label for="idname" th:text="#{title}"></label><br/>
+				            <input type="text" id="title" name="title"/><br/><br/>
+				            
+				            <label for="iemail" th:text="#{url}"></label><br/>
+				            <input type="text" id="url" name="url"/><br/><br/>
+
+							<input type="submit" th:value="#{autoc}"></input>
+						 </div>	
+				    </form> 
+				</div>
+			</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
@@ -33,4 +114,4 @@
 	</form>
 	<a th:href="@{/home}">Back</a>
 </body>
-</html>
+</html>   -->

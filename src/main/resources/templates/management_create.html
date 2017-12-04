@@ -1,3 +1,142 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+	  
+   </head>
+	<body>
+	
+		<div class="headerP">
+			<h1 th:text="#{storep}"></h1>	
+			<div class="lan">	
+				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+			</div>
+			<div class="Hi">	
+				<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
+				<!-- <form th:action="@{/logout}" method="post">
+					<input id="btsingout" type="submit" th:value="#{singout}"/>
+				</form>  -->	  			
+			</div>					
+		</div>
+	
+		<div class="rowP">
+			<div class="col-2 menu">
+				<ul>
+					<li><a th:href="@{/home}" th:text="#{home}"></a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
+					<li><a href="/logout" th:text="#{singout}" ></a> </li>
+				</ul>
+			</div>
+		<div class="col-9">
+					<h2 th:text="#{addfilm}"></h2>
+					
+					
+				
+				    <form id="formeditar" action="#" th:action="@{/management/films/confirm}" method="post">
+				    
+				       <div class="newpform">
+				        <table class="tablelist">
+							<tr>
+								<td>Title</td>
+								<td><h6 th:text="${film.Title}"></h6></td>
+							</tr>
+					
+							<tr>
+								<td>Year</td>
+								<td><h6 th:text="${film.Year}"></h6></td>
+							</tr>
+					
+							<tr>
+								<td>Director</td>
+								<td><h6 th:text="${film.Director}"></h6></td>
+							</tr>
+					
+							<tr>
+								<td>Poster</td>
+								<td rowspan="11" ><img th:src="${film.Poster}" /></td>
+							</tr>
+					
+							<tr>
+								<td>Description</td>
+								<td><h6 th:text="${film.Plot}"></h6></td>		
+							</tr>
+							<tr>
+								<td>Actors</td>
+								<td><h6 th:text="${film.Actors}"></h6></td>
+							</tr>
+							<tr>
+								<td>Ratings</td>
+								<td></td>
+							</tr>
+							<tr th:each="rating : ${film.Ratings}">
+								<td><h6 th:text="${rating.Source}"></h6></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><h6 th:text="${result}"></h6></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="submit" th:value="#{confirm}"></input>
+								</td>
+							</tr>
+						</table>
+
+					</div>
+					
+					<input type="hidden" th:field="${film.Title}"/>
+					<input type="hidden" th:field="${film.Year}"/>
+					<input type="hidden" th:field="${film.Director}"/>
+					<input type="hidden" th:field="${film.Poster}"/>
+					<input type="hidden" th:field="${film.Plot}"/>
+					<input type="hidden" th:field="${film.Actors}"/>
+					<input type="hidden" th:field="${film.Ratings}"/>
+					
+				    </form> 
+				</div>
+			</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
@@ -74,4 +213,4 @@
 			</table>
 		</form>
 	</body>
-</html>
+</html>  -->

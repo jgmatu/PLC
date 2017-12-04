@@ -1,13 +1,13 @@
 package es.urjc.master.practica.controllers;
 
-import java.io.IOException;
+
 import java.util.Arrays;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +29,8 @@ public class VideoClubControllers {
 	
 	@Autowired
 	private UserRepository usersDB;
-	
-	@RequestMapping(value = {"/", "login"})
+
+	@RequestMapping(value = {"/", "/login"})
 	public ModelAndView login() {
 		return new ModelAndView("login");
 	}
@@ -43,7 +43,7 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/home", method= RequestMethod.GET)
 	public ModelAndView search() {
-		return new ModelAndView("films");
+		return new ModelAndView("films").addObject("films", filmsDB.findAll());
 	}
 
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
@@ -86,6 +86,21 @@ public class VideoClubControllers {
 				.addObject("film", film);
 	}
 	
+	
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@RequestMapping(value = "/management/films/confirm", method = RequestMethod.POST)
+	public ModelAndView confirmHome(@RequestParam String Title) {
+		Film film = filmsDB.findOne(Title);
+		if (film == null) {
+			return new ModelAndView("films"); 
+		} else {
+			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
+		}	
+	}
+	
+	
+	/*
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/users", method = RequestMethod.GET)
 	public ModelAndView managmenetUsers() {
@@ -104,4 +119,55 @@ public class VideoClubControllers {
 		usersDB.save(user);
 		return new ModelAndView("films");
 	}
+	}*/
+	
+	@RequestMapping(value = "/create/user", method = RequestMethod.GET)
+	public ModelAndView createUser() {
+		return new ModelAndView("create_user")
+				.addObject("user", new User());
+	}
+
+	@RequestMapping("/create/user/new")   
+	public String newUser(@Valid User user) {
+		user.setUser();
+		usersDB.save(user);
+		return "login";
+	}
+
+	
+	@Secured("ROLE_ADMIN")
+    @RequestMapping("/management/users")
+	public String listusers(Model model){
+		model.addAttribute("users", usersDB.findAll());
+        return "management_users";
+    }	
+
+	@Secured({"ROLE_ADMIN"})
+    @RequestMapping("/delete/user/{name}")
+    public String borrar(@PathVariable String name){
+		usersDB.delete(name);
+        return "redirect:/management/users";
+    }
+
+	@Secured({"ROLE_ADMIN"})
+	@RequestMapping("/user/admin/{name}")
+	public String userAdmin(@PathVariable String name, Model model) {	
+		model.addAttribute("user", usersDB.findOne(name));
+		return "edit_user";
+	}
+
+	@Secured({"ROLE_ADMIN"})
+	@RequestMapping("/user/update")
+	public String updateAdmin(@Valid User user,  boolean checkadmin) {
+		if (checkadmin) {
+			user.setAdmin();
+		} else {
+			user.setUser();
+		}
+		usersDB.save(user);
+		return "management_users";
+	}
+
+	
+
 }

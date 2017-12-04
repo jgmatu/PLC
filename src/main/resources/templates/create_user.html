@@ -1,49 +1,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1"/>
-	<link th:href="@{/css/estilos.css}" rel="stylesheet"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<script type="text/javascript" th:src="@{/js/validacion.js}"></script>
-	<title th:text="#{storep}"></title>
-</head>
+	<meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+	  
+      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
+      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
 
-<body>
-	<div class="headerP">
-		<h1 th:text="#{storep}"></h1>	
-		<div class="lan">	
-			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
-			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a> 
-			<p><h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5></p>	
-			<form th:action="@{/logout}" method="post">
-				<input id="btsingout" type="submit" th:value="#{singout}"/>
-			</form>				
-		</div>					
-	</div>
-	
+   </head>
+	<body>
+		<div class="headerP">
+			<h1 th:text="#{storep}"></h1>	
+			<div class="lan">	
+				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+			</div>
+			<div class="Hi">	
+				<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
+				<!-- <form th:action="@{/logout}" method="post">
+					<input id="btsingout" type="submit" th:value="#{singout}"/>
+				</form>  -->	  			
+			</div>					
+		</div>
 	
 	<div class="rowP">
 		<div class="col-3 menu">
 			<ul>
 				<li><a href="/" th:text="#{home}"></a></li>
-				<li><a href="/productos" th:text="#{listprod}"></a></li>
+				<!-- <li><a href="/productos" th:text="#{listprod}"></a></li>  -->
 			</ul>
 		</div>
 		
 		<div class="col-9">
-			<h2 th:text="#{newprod}"></h2>
-			
-		    <form id="formnuevo" th:object="${producto}" th:action="@{/producto}" method="post">
+			<h2 th:text="#{newuser}"></h2>
+
+		    <form action="#" th:object="${user}" th:action="@{/create/user/new}" method="post">
 		        <div class="newpform">
-		            <input type="hidden" th:field="*{codigo}"/>
+		            <!-- <input type="hidden" th:field="*{codigo}"/>  -->
 		            <label for="idname" th:text="#{name}"></label><br/>
-		            <input type="text" id="idname" th:field="*{nombre}"/><br/><br/>
-		            <label for="idescri" th:text="#{description}"></label><br/>
-		            <input type="text" id="idescri" th:field="*{descripcion}"/><br/><br/>
-		            <label for="idpre" th:text="#{price}"></label><br/>
-		            <input type="text" id="idpre" th:field="*{precio}"/><br/><br/>
-					<input id="btnvalida" onClick="btnvalida()" type="submit" th:value="#{save}"></input>
+		            <input type="text" id="name" name="name" th:field="*{name}"/><br/><br/>
+		            <label for="ipass" th:text="#{password}"></label><br/>
+		            <input type="password" id="password" name="password" th:field="*{password}"/><br/><br/>
+		            <label for="iemail" th:text="#{email}"></label><br/>
+		            <input type="text" id="iemail" th:field="*{email}"/><br/><br/>
+					<input type="submit" th:value="#{save}"></input>
 				 </div>	
-		    </form> 
+		    </form> 			 
 		</div>
 	</div>
 </body>
