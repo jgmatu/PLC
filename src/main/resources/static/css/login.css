@@ -24,11 +24,16 @@ a {
 h1{	
 	text-align:center;
 }
+h5{	
+	top: 5px;
+	left: 0;
+	padding: 1px;
+}
 h2{
 	color : #dddddd;
 }
 span{
-	color : red;
+	color : black;
 }
 .lan{
 	position: absolute;
@@ -58,6 +63,26 @@ span{
 }
 #btsingout{
 	border: none;
+	font-size:10px;
+    font-family:Verdana,Helvetica;
+    font-weight:bold;
+    color:black;
+    background:#dad6d6;
+    border:0px;
+    width:60px;
+    height:18px;
+}
+#imgPosterList{
+	height: 100px;
+	width: 80px;
+}
+#imgDelEdit{
+	height: 40px;
+	width: 40px;
+}
+#imgPosterAdd{
+	height: 345px;
+	width: 210px;
 }
 
 [class*="col-"] {

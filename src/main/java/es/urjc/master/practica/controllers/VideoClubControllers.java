@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import es.urjc.master.practica.customers.FilmsRepository;
 import es.urjc.master.practica.customers.UserRepository;
 import es.urjc.master.practica.entities.Film;
@@ -77,15 +76,40 @@ public class VideoClubControllers {
 	public ModelAndView managementFilmsCreate(@RequestParam String title, @RequestParam String url) {
 		if (filmsDB.exists(title)) {
 			return new ModelAndView("management_create")
-					.addObject("result", "Film Already Exist")
+					.addObject("result", "inDB")
 					.addObject("film", filmsDB.findOne(title));
 		}	
 		Film film = filmsService.getFilm(title);
-		filmsDB.save(film);
+		//filmsDB.save(film);
 		return new ModelAndView("management_create")
-				.addObject("result", "Film Added!!!")
+				.addObject("result", "outDB")
 				.addObject("film", film);
 	}	
+
+	@Secured({"ROLE_ADMIN"})
+    @RequestMapping("/addfilm/{Title}")
+    public ModelAndView saveFilm(@PathVariable String Title){
+			Film film = filmsService.getFilm(Title);
+			filmsDB.save(film);
+			return new ModelAndView("success")
+					.addObject("message", "Film added successfully");	
+    }
+	
+	
+	@Secured({"ROLE_ADMIN"})
+    @RequestMapping("/delete/film/{Title}")
+    public String deleteFilm(@PathVariable String Title){
+		filmsDB.delete(Title);
+        return "redirect:/home";
+    }
+	
+	
+	
+	@Secured({"ROLE_ADMIN"})
+    @RequestMapping("/view/film/{Title}")
+    public ModelAndView viewFilm(@PathVariable String Title){
+		return new ModelAndView("show").addObject("film", filmsDB.findOne(Title));
+    }
 	
 	/*@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/management/films/confirm", method = RequestMethod.POST)

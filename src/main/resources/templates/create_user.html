@@ -1,44 +1,36 @@
-<html xmlns:th="http://www.thymeleaf.org" 
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<meta charset="utf-8"/>
+	  <meta charset="utf-8"/>
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <title th:text="#{storep}"></title>
-	  
-      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
-      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
-
    </head>
 	<body>
-		<div class="headerP">
-			<h1 th:text="#{storep}"></h1>	
-			<div class="lan">	
-				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
-				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
-			</div>
-			<div class="Hi">	
-				<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
-				<!-- <form th:action="@{/logout}" method="post">
-					<input id="btsingout" type="submit" th:value="#{singout}"/>
-				</form>  -->	  			
-			</div>					
+	<div class="headerP">
+		<h1 th:text="#{storep}"></h1>	
+		<div class="lan">	
+			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
 		</div>
-	
+		<div class="Hi">	
+			<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
+			<form th:action="@{/logout}" method="post">
+				<input id="btsingout" type="submit" th:value="#{singout}"/>
+			</form> 	  			
+		</div>					
+	</div>
 	<div class="rowP">
 		<div class="col-3 menu">
 			<ul>
 				<li><a href="/" th:text="#{home}"></a></li>
-				<!-- <li><a href="/productos" th:text="#{listprod}"></a></li>  -->
 			</ul>
 		</div>
 		
 		<div class="col-9">
 			<h2 th:text="#{newuser}"></h2>
 
-		    <form action="#" th:object="${user}" th:action="@{/create/user/new}" method="post">
+		    <form th:object="${user}" th:action="@{/create/user/new}" method="post">
 		        <div class="newpform">
 		            <!-- <input type="hidden" th:field="*{codigo}"/>  -->
 		            <label for="idname" th:text="#{name}"></label><br/>
