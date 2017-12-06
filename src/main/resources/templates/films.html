@@ -38,11 +38,6 @@
 						</tr>
 					</table>
 				</form>
-<<<<<<< HEAD
-				
-				<!-- Search Result -->
-=======
->>>>>>> 0837115a0ccd9084d0e40cdb1f7e501868f774ff
 				<h2 th:text="#{listfilms}"></h2>		
 				<div class="newpform" th:if="${not #lists.isEmpty(films)}">     
 			        <table class="tablelist">
@@ -62,17 +57,10 @@
 								<td><h6 th:text="${film.Title}"></h6></td>
 								<td><h6 th:text="${film.Year}"></h6></td>
 								<td><h6 th:text="${film.Director}"></h6></td>
-<<<<<<< HEAD
 								<td><h6 th:src="${film.Poster}"></h6></td>
-=======
-
->>>>>>> 0837115a0ccd9084d0e40cdb1f7e501868f774ff
 								<td><h6 th:text="${film.Plot}"></h6></td>		
 								<td><h6 th:text="${film.Actors}"></h6></td>
-<<<<<<< HEAD
-								<td><h6>Rating</h6></td>
-=======
-								
+																
 								<td><h6></h6>Ratings</td>
 								<!-- <td><h6 th:text="${film.Ratings}"></h6></td>  -->
 
@@ -81,8 +69,6 @@
 								<td sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtEditf" th:href="${'/edit/film/' + film.Title}"><img id="imgDelEdit" alt="" th:src="@{/images/edit.png}"/></a></td>
 			                	<td sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtDeletef" th:href="${'/delete/film/' + film.Title}"><img id="imgDelEdit" alt="" th:src="@{/images/delete.png}"/></a></td>
 			                	<td><a id="txtView" th:href="${'/view/film/' + film.Title}"><img id="imgDelEdit" alt="" th:src="@{/images/view.png}"/></a></td> 
-
->>>>>>> 0837115a0ccd9084d0e40cdb1f7e501868f774ff
 							</tr>
 					</table> 
 				</div> 		  	    	  
