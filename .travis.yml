@@ -11,7 +11,7 @@ services:
 
 before_install:
 - docker pull fjgutierrezs91/mysql
-- docker ps -a
 
+- docker ps -a
 script: mvn clean verify
 install: true
