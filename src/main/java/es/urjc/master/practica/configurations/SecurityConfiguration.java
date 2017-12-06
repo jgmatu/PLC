@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	public AuthProviderProducts authenticationProvider;
+	public AuthenticationProviderConfiguration authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

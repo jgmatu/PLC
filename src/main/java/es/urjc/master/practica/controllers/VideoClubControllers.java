@@ -36,7 +36,7 @@ public class VideoClubControllers {
 	
 	@RequestMapping(value = "/denied")
 	public ModelAndView denied() {
-		return new ModelAndView("denied");
+		return new ModelAndView("denied_page");
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
@@ -45,22 +45,10 @@ public class VideoClubControllers {
 		return new ModelAndView("films").addObject("films", filmsDB.findAll());
 	}
 
-	/*@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@RequestMapping(value = "/home", method = RequestMethod.POST)
-	public ModelAndView resultSearch(@RequestParam String name) {
-		Film film = filmsDB.findOne(name);
-		
-		if (film == null) {
-			return new ModelAndView("films"); 
-		} else {
-			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
-		}
-	}	*/
-	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "show")
 	public ModelAndView show(@RequestParam String video) {
-		return new ModelAndView("show").addObject("video", video);
+		return new ModelAndView("show_film").addObject("video", video);
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -79,7 +67,6 @@ public class VideoClubControllers {
 					.addObject("film", filmsDB.findOne(title));
 		}	
 		Film film = filmsService.getFilm(title);
-		//filmsDB.save(film);
 		return new ModelAndView("management_create")
 				.addObject("result", "outDB")
 				.addObject("film", film);
@@ -107,23 +94,9 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN"})
     @RequestMapping("/view/film/{Title}")
     public ModelAndView viewFilm(@PathVariable String Title){
-		return new ModelAndView("show").addObject("film", filmsDB.findOne(Title));
+		return new ModelAndView("show_film").addObject("film", filmsDB.findOne(Title));
     }
-	
-	/*@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@RequestMapping(value = "/management/films/confirm", method = RequestMethod.POST)
-	public ModelAndView confirmHome(@RequestParam String Title) {
-		return new ModelAndView("/home");			
 
-	}
-		Film film = filmsDB.findOne(Title);
-		if (film == null) {
-			return new ModelAndView("films"); 
-		} else {
-			return new ModelAndView("films").addObject("films", Arrays.asList(film));			
-		}	
-	}*/
-	
 	@RequestMapping(value = "/create/user", method = RequestMethod.GET)
 	public ModelAndView createUser() {
 		return new ModelAndView("create_user").addObject("user", new User());
@@ -161,7 +134,7 @@ public class VideoClubControllers {
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateAdmin(Model model, String name, boolean checkadmin) {
 		User user = usersDB.findOne(name);
-		usersDB.delete(user);		
+		usersDB.delete(user);
 		if (checkadmin) {
 			user.setAdmin();
 		} else {

@@ -36,6 +36,21 @@ public class UserTest {
 		
 		userB.setName("");
 		assertEquals(userA, userB);		
+		
+		assertEquals(userA, userA);
+		
+		Film film = new Film();
+		
+		assertNotEquals(userA, film);
+		
+		userB.setPassword("Bla");
+		assertNotEquals("", userB.getPassword());
+
+		
+		GrantedAuthority[] userRoles = { new SimpleGrantedAuthority("ROLE_USER") };
+		userB.setRoles(Arrays.asList(userRoles));
+		userA.setRoles(Arrays.asList(userRoles));
+		assertEquals(userA.getRoles(), userB.getRoles());
 	}
 
 }

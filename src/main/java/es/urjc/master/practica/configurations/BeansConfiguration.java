@@ -13,7 +13,7 @@ import feign.jackson.JacksonEncoder;
 
 
 @Configuration
-public class BeansConfiguration{
+public class BeansConfiguration {
 	
 	private static final String BACK_URL = "http://www.omdbapi.com/";
 	
