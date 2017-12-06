@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,8 +22,8 @@ import es.urjc.master.practica.configurations.DatabaseConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-//@ContextConfiguration(classes = {VideoClubApp.class, DatabaseConfiguration.class})
-//@WebAppConfiguration
+@ContextConfiguration(classes = {VideoClubApp.class, DatabaseConfiguration.class})
+@WebAppConfiguration
 public class VideoClubTest {
 	
 	@Autowired
@@ -34,18 +33,16 @@ public class VideoClubTest {
 	
 	@Before
 	public void initalize() {
-//		MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-//		driver = MockMvcHtmlUnitDriverBuilder.mockMvcSetup(mockMvc).build();
-//		driver = new FirefoxDriver();
+		MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+		driver = MockMvcHtmlUnitDriverBuilder.mockMvcSetup(mockMvc).build();
 	}
 	
 	@Test 
 	public void viewLoginTest() {
-//		checkRootPage();
-//		login();
-//		checkLogged();
+		checkRootPage();
+		login();
 	}
-/*	
+	
 	private void checkRootPage() {
 		driver.get("http://localhost:8080/");
 		
@@ -67,10 +64,4 @@ public class VideoClubTest {
 		password.sendKeys("root1");
 		login.click();
 	}
-	
-	private void checkLogged() {		
-		WebElement search = driver.findElement(By.id("search"));
-		assertTrue(search.isDisplayed());
-	}
-*/
 }
