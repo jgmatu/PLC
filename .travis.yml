@@ -10,8 +10,15 @@ services:
 
 before_install:
 - docker pull fjgutierrezs91/mysql
-- docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=VideoClub -e MYSQL_USER=web -e MYSQL_PASSWORD=123456 -p 33060:3306 -d mysql:latest
+- docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=VideoClubc -e MYSQL_USER=web -e MYSQL_PASSWORD=123456 -p 33060:3306 -d mysql:latest
 - docker ps -a
 
 script: mvn clean verify
 install: true
+
+after_success:
+      - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker build -t fjgutierrezs91/web .
+      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+      docker push fjgutierrezs91/web
+      fi
