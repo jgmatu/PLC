@@ -10,7 +10,7 @@ services:
 
 before_install:
 - docker pull fjgutierrezs91/mysql
-- docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=example -e MYSQL_USER=web -e MYSQL_PASSWORD=123456 -p 33060:33060 -d mysql:latest
+- docker run --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=example -e MYSQL_USER=web -e MYSQL_PASSWORD=123456 -p 33060:3306 -d mysql:latest
 - docker ps -a
 
 script: mvn clean verify
