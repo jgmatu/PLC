@@ -11,6 +11,8 @@ services:
 
 before_install:
 - docker pull fjgutierrezs91/mysql
+- docker run --name web -p 8080:8080 --link mysql -d web
+
 - docker ps -a
 
 script: mvn clean verify
