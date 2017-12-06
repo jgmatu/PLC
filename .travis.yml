@@ -17,8 +17,7 @@ script: mvn clean verify
 install: true
 
 after_success:
-      - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker build -t fjgutierrezs91/web .
-      docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-      docker push fjgutierrezs91/web
-      fi
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+    docker push USER/REPO;
+    fi
