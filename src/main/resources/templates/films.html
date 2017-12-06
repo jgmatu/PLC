@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	  <meta charset="utf-8"/>
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
@@ -46,9 +47,6 @@
 				</form>
 				
 				<!-- Search Result -->
-				<!-- <div th:unless="${#lists.isEmpty(films)}">
-					<table> -->
-
 				<h2 th:text="#{listfilms}"></h2>		
 				<div class="newpform" th:if="${not #lists.isEmpty(films)}">     
 			        <table class="tablelist">
@@ -63,17 +61,11 @@
 						</tr>
 						 <tr th:each="film : ${films}">
 								<td><h6 th:text="${film.Title}"></h6></td>
-
 								<td><h6 th:text="${film.Year}"></h6></td>
-
 								<td><h6 th:text="${film.Director}"></h6></td>
-
 								<td><h6 th:src="${film.Poster}"></h6></td>
-
 								<td><h6 th:text="${film.Plot}"></h6></td>		
-
 								<td><h6 th:text="${film.Actors}"></h6></td>
-								
 								<td><h6>Rating</h6></td>
 							</tr>
 					</table> 

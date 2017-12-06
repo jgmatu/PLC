@@ -43,7 +43,12 @@ public class Film {
 
 	public Film(String Title, String video, String description, String year, String director, String reparto, String portada, ArrayList<Rating> Ratings) {
 		this.Title = Title;
-		this.Ratings = new ArrayList<Rating>();
+		this.Poster = portada;
+		this.Director = director;
+		this.Year = year;
+		this.Plot = description;
+		this.Actors = reparto;
+		this.Ratings = Ratings;
 	}
 
 	public Film() {
@@ -53,10 +58,9 @@ public class Film {
 	@Override
 	public String toString() {
 		StringBuffer format = new StringBuffer();
-
+		
 		format.append(String.format("Title : %s Year: %s Director: %s Actors: %s"
 				+ "Poster: %s\n", Title, Year, Director, Actors, Poster));
-
 		for (Rating r: Ratings) {
 			format.append(String.format("\t%s", r.toString()));
 		}		

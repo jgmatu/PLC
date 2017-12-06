@@ -74,7 +74,7 @@ public class VideoClubControllers {
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/films/create", method = RequestMethod.POST)
-	public ModelAndView managementFilmsCreate(@RequestParam String title, @RequestParam String url) {
+	public ModelAndView managementFilmsCreate(String title, String url) {
 		if (filmsDB.exists(title)) {
 			return new ModelAndView("management_create")
 					.addObject("result", "Film Already Exist")
@@ -100,8 +100,7 @@ public class VideoClubControllers {
 	
 	@RequestMapping(value = "/create/user", method = RequestMethod.GET)
 	public ModelAndView createUser() {
-		return new ModelAndView("create_user")
-				.addObject("user", new User());
+		return new ModelAndView("create_user").addObject("user", new User());
 	}
 
 	@RequestMapping("/create/user/new")   

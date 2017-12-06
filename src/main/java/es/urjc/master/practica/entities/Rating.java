@@ -18,6 +18,15 @@ public class Rating {
 	@JsonProperty("Value")
 	private String Value;
 
+	public Rating() {
+		;
+	}
+	
+	public Rating(String value, String source) {
+		this.Source = source;
+		this.Value = value;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Source : %s Value : %s\n", Source, Value);
