@@ -17,5 +17,5 @@ script: mvn clean verify
 install: true
 
 after_success:
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-    - docker push fjgutierrezs91/web;
+    - sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - sudo docker push fjgutierrezs91/web
