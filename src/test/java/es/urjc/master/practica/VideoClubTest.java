@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import es.urjc.master.practica.configurations.DatabaseConfiguration;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest
+@SpringBootTest
 //@ContextConfiguration(classes = {VideoClubApp.class, DatabaseConfiguration.class})
 //@WebAppConfiguration
 public class VideoClubTest {
