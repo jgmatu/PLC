@@ -1,16 +1,10 @@
-<html xmlns:th="http://www.thymeleaf.org" 
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<meta charset="utf-8"/>
+	  <meta charset="utf-8"/>
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <title th:text="#{storep}"></title>
-	  
-      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
-      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
-
    </head>
 	<body>
 	<div class="headerP">
@@ -20,19 +14,18 @@
 			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
 		</div>
 		<div class="Hi">	
-			<h5 th:text="#{hi} + ', '"></h5><h5 sec:authentication="name"></h5>
-			<!-- <form th:action="@{/logout}" method="post">
+			<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
+			<form th:action="@{/logout}" method="post">
 				<input id="btsingout" type="submit" th:value="#{singout}"/>
-			</form>  -->	  			
+			</form> 	  			
 		</div>					
 	</div>
-	
 	<div class="rowP">
 		<div class="col-3 menu">
 			<ul>
 				<li><a href="/" th:text="#{home}"></a></li>
-				<!-- <li><a href="/productos" th:text="#{listprod}"></a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/producto/nuevo" th:text="#{newprod}"></a></li>  -->
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
 			</ul>
 		</div>
 		
@@ -46,19 +39,15 @@
 		            <input type="text" id="name" name="name" th:value="${user.name}"/><br/><br/>
 		            
 		            <label for="iemail" th:text="#{email}"></label><br/>
-		            <input type="text" id="email"/><br/><br/>
+		            <input type="text" id="email" name="email" th:value="${user.email}"/><br/><br/>
 		            
-		            <label for="irole" th:text="#{admin}"></label><br/>
-					<input type="checkbox" name="checkadmin"/><br/><br/>
+		            <input type="checkbox" name="checkadmin"/>
+		            <label for="irole" th:text="' ' + #{admin}"></label><br/><br/>
 
 					<input type="submit" th:value="#{save}"></input>
 				 </div>	
 		    </form> 
 		</div>
 	</div>
-	
-	<!-- <script th:src="@{http://code.jquery.com/jquery-1.11.3.min.js}"></script>
-	<script th:src="@{http://code.jquery.com/ui/1.11.4/jquery-ui.min.js}"></script>	
-	<script type="text/javascript" th:src="@{/js/validacion.js}"></script>   -->
 </body>
 </html>

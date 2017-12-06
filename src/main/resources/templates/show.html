@@ -1,12 +1,39 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<meta charset="utf-8"/>
-		<title>Show Films</title>
-	</head>
+	  <meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+   </head>
 	<body>
-		<h1>Name Film</h1>
-			<iframe width="560" height="315" th:src="${video}"> </iframe>
-		<br/>
-		<a th:href="@{/home}">Come Back</a>
-	</body>
+	<div class="headerP">
+		<h1 th:text="#{storep}"></h1>	
+		<div class="lan">	
+			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+		</div>
+		<div class="Hi">	
+			<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
+			<form th:action="@{/logout}" method="post">
+				<input id="btsingout" type="submit" th:value="#{singout}"/>
+			</form> 	  			
+		</div>					
+	</div>
+	<div class="rowP">
+		<div class="col-3 menu">
+			<ul>
+				<li><a href="/" th:text="#{home}"></a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
+			</ul>
+		</div>
+		
+		<div class="col-9">
+			<h2 th:text="#{edituser}"></h2>
+				
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/3NwMrj0pBVs" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe> 
+		</div>
+	</div>
+</body>
 </html>
