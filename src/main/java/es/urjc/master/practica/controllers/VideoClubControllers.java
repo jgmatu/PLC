@@ -1,6 +1,9 @@
 package es.urjc.master.practica.controllers;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -44,21 +47,37 @@ public class VideoClubControllers {
 	public ModelAndView search() {
 		return new ModelAndView("films").addObject("films", filmsDB.findAll());
 	}
-
+	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@RequestMapping(value = "show")
-	public ModelAndView show(@RequestParam String video) {
-		return new ModelAndView("show_film").addObject("video", video);
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
+	public ModelAndView searchOne(String title) {
+		List<Film> filmOne = new ArrayList<Film>();
+		filmOne.add(filmsDB.findOne(title));
+		return new ModelAndView("films").addObject("films", filmOne);
+	}
+
+	@Secured("ROLE_ADMIN")
+	@RequestMapping("management/films")
+	public ModelAndView managementFilms() {
+		return new ModelAndView("management_films");
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management/films")
-	public ModelAndView managementFilms() {
+	@RequestMapping(value = "management/films", method = RequestMethod.POST)
+	public ModelAndView managementFilmsCreate(String title) {
+		if (filmsDB.exists(title)) {
+			return new ModelAndView("management_films")
+					.addObject("result", "\r\n" + 
+							"Film exists in the database")
+					.addObject("film", filmsDB.findOne(title));
+		}	
+		Film film = filmsService.getFilm(title);
 		return new ModelAndView("management_films")
-				.addObject("film", new Film()).addObject("hidden", true);
+				.addObject("result", "Film does not exist in the database")
+				.addObject("film", film);
 	}
 
-	@Secured("ROLE_ADMIN")
+	/*@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "management/films/create", method = RequestMethod.POST)
 	public ModelAndView managementFilmsCreate(String title, String url) {
 		if (filmsDB.exists(title)) {
@@ -70,17 +89,53 @@ public class VideoClubControllers {
 		return new ModelAndView("management_create")
 				.addObject("result", "outDB")
 				.addObject("film", film);
-	}	
+	}*/	
+
 
 	@Secured({"ROLE_ADMIN"})
     @RequestMapping("/addfilm/{Title}")
     public ModelAndView saveFilm(@PathVariable String Title){
 			Film film = filmsService.getFilm(Title);
 			filmsDB.save(film);
-			return new ModelAndView("success")
-					.addObject("message", "Film added successfully");	
+			return new ModelAndView("url_film")
+					.addObject("title", Title);	
     }
 	
+	@Secured({"ROLE_ADMIN"})
+	@RequestMapping(value = "/film/update", method = RequestMethod.POST)
+	public String updateUrl(Model model, String title, String urlt) {
+		Film film = filmsDB.findOne(title);
+		filmsDB.delete(film);
+		String[] partes = urlt.split("=");
+		String part1 = partes[0]; 
+		String part2 = partes[1]; 
+		film.setTrailer(part2);
+		filmsDB.save(film);
+		model.addAttribute("message", "Saved film");
+        return "success";
+	}
+	
+	/*@Secured({"ROLE_ADMIN"})
+	@RequestMapping(value = "/film/update/all", method = RequestMethod.POST)
+	public String updateUrl(Model model, String title, String urlt) {
+		Film film = filmsDB.findOne(title);
+		filmsDB.delete(film);
+		String[] partes = urlt.split("=");
+		String part1 = partes[0]; 
+		String part2 = partes[1]; 
+		film.setTrailer(part2);
+		filmsDB.save(film);
+		model.addAttribute("message", "Saved film");
+        return "success";
+	}*/
+	
+	
+	
+	
+	
+	
+	
+
 	
 	@Secured({"ROLE_ADMIN"})
     @RequestMapping("/delete/film/{Title}")
@@ -88,16 +143,21 @@ public class VideoClubControllers {
 		filmsDB.delete(Title);
         return "redirect:/home";
     }
-	
-	
-	
-	@Secured({"ROLE_ADMIN"})
+
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping("/view/film/{Title}")
     public ModelAndView viewFilm(@PathVariable String Title){
 		return new ModelAndView("show_film").addObject("film", filmsDB.findOne(Title));
     }
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @RequestMapping("/edit/film/{Title}")
+	public ModelAndView editFilm(@PathVariable String Title){
+		return new ModelAndView("edit_film").addObject("film", filmsDB.findOne(Title));
+    }
+	
 
-	@RequestMapping(value = "/create/user", method = RequestMethod.GET)
+	@RequestMapping("/create/user")
 	public ModelAndView createUser() {
 		return new ModelAndView("create_user").addObject("user", new User());
 	}
@@ -106,14 +166,24 @@ public class VideoClubControllers {
 	public String newUser(@Valid User user) {
 		user.setUser();
 		usersDB.save(user);
-		return "login";
+		return "/login";
+	}
+	
+
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/management/users")
+	public ModelAndView managementUsers() {
+		return new ModelAndView("management_users")
+				.addObject("users", new Film()).addObject("users", usersDB.findAll());
 	}
 
-	@Secured("ROLE_ADMIN")
-    @RequestMapping("/management/users")
-	public String listusers(Model model){
-		model.addAttribute("users", usersDB.findAll());
-        return "management_users";
+	@Secured({"ROLE_ADMIN"})
+    @RequestMapping(value = "/management/users", method = RequestMethod.POST)
+	public ModelAndView listOneuser(String user){
+		List<User> userOne = new ArrayList<User>();
+		userOne.add(usersDB.findOne(user));
+		return new ModelAndView("management_users").addObject("users", userOne);
     }	
 
 	@Secured({"ROLE_ADMIN"})
@@ -132,7 +202,7 @@ public class VideoClubControllers {
 
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
-	public String updateAdmin(Model model, String name, boolean checkadmin) {
+	public String updateAdmin(Model model, String name, String email, boolean checkadmin) {
 		User user = usersDB.findOne(name);
 		usersDB.delete(user);
 		if (checkadmin) {
@@ -140,6 +210,7 @@ public class VideoClubControllers {
 		} else {
 			user.setUser();
 		}
+		user.setEmail(email);
 		usersDB.save(user);
 		model.addAttribute("users", usersDB.findAll());
         return "management_users";

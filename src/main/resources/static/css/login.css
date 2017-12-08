@@ -46,7 +46,7 @@ span{
 	position: absolute;
     top: 1px;
     left: 0;
-    width: 100px;
+    width: 150px;
     height: 50px;
 }
 .headerP {
@@ -69,7 +69,7 @@ span{
     color:black;
     background:#dad6d6;
     border:0px;
-    width:60px;
+    width:85px;
     height:18px;
 }
 #imgPosterList{
@@ -127,8 +127,9 @@ span{
 	border: #c0c0c0 2px solid;
     width: 100%;
 }
+
 td {
-    text-align: center;
+    text-align: left;
     padding: 8px;
 }
 th {
@@ -137,9 +138,39 @@ th {
     text-align: center;
     padding: 8px;
 }
+#trailertr{
+	background-color:#000000;
+}
+#trailertd{
+	text-align: center;
+}
+#trailerif{
+	width : 660px ;
+	height : 415px;
+}
 tr:nth-child(even){
 	background-color: #9ec5da;
 }
 .tdleft{
 	text-aling : left;
+}
+
+
+#username-error{
+	color:red;
+}
+#password-error{
+	color:red;
+}
+#name-error{
+	color:red;
+}
+#email-error{
+	color:red;
+}
+#title-error{
+	color:red;
+}
+#url-error{
+	color:red;
 }

@@ -5,7 +5,7 @@
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <title th:text="#{storep}"></title>
-	  	  	  
+	  	  	  	  
 	  <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 	  <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
 	  <script src="/js/login.js" type="text/javascript"></script>
@@ -35,23 +35,40 @@
 		</div>
 		
 		<div class="col-10">
-			<h2 th:text="#{edituser}"></h2>
+			<h2 th:text="#{editfilm}"></h2>
 				
-		    <form id="formEdituser" th:action="@{/user/update}" method="post">
+		    <form id="formEditfilm" th:action="@{/film/update}" method="post">
 		        <div class="newpform">
 		           
-		            <label for="name" th:text="#{name}" ></label><br/>
-		            <input type="text" id="name" name="name" th:value="${user.name}" readonly="readonly"/><br/><br/>
+		            <label for="name" th:text="#{title}" ></label><br/>
+		            <input type="text" id="name" name="title" th:value="${title}" readonly="readonly"/><br/><br/>
 		            
-		            <label for="iemail" th:text="#{email}"></label><br/>
-		            <input type="text" id="email" name="email" th:value="${user.email}"/><br/><br/>
-		            
-		            <input type="checkbox" name="checkadmin"/>
-		            <label for="irole" th:text="' ' + #{admin}"></label><br/><br/>
+		            <label for="urlt" th:text="#{urlt}"></label><br/>
+		            <input type="text" id="url" name="urlt"/><br/><br/>
 
 					<input type="submit" th:value="#{save}"></input>
 				 </div>	
 		    </form> 
+		    
+		    <table>
+		    	<tr>
+		    		<td>
+		    			<h2 th:text="#{step1}"></h2>
+		    			<h2 th:text="#{step1message}"></h2>
+		    			<img alt="" th:src="@{/images/youtube.jpg}"/>
+		    			
+		    		</td>
+		    		<td>
+		    			<img alt="" th:src="@{/images/arrow.png}"/>
+		    		</td>
+		    		<td>
+		    			<h2 th:text="#{step2}"></h2>
+		    			<h2 th:text="#{step1message}"></h2>
+		    			<img alt="" th:src="@{/images/pasteurl.jpg}"/>
+		    		</td>
+		    	</tr>
+		    </table>
+		    
 		</div>
 	</div>
 </body>

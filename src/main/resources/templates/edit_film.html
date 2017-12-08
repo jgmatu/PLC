@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	  <meta charset="utf-8"/>
+	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <title th:text="#{storep}"></title>
+	  	  	  
+	  <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	  <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
+	  <script src="/js/login.js" type="text/javascript"></script>
+	  
+   </head>
+	<body>
+	<div class="headerP">
+		<h1 th:text="#{storep}"></h1>	
+		<div class="lan">	
+			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+		</div>
+		<div class="Hi">	
+			<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
+			<form th:action="@{/logout}" method="post">
+				<input id="btsingout" type="submit" th:value="#{singout}"/>
+			</form> 	  			
+		</div>					
+	</div>
+	<div class="rowP">
+		<div class="col-2 menu">
+			<ul>
+				<li><a th:href="@{/home}" th:text="#{home}"></a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
+			</ul>
+		</div>
+		
+		<div class="col-10">
+			<h2 th:text="#{editfilm}"></h2>
+				
+		    <form id="formEdituser" th:action="@{/film/update/all}" method="post">
+		        <div class="newpform">
+		           
+		            <label for="title" th:text="#{title}" ></label><br/>
+		            <input type="text" id="title" name="title" th:value="${film.Title}" readonly="readonly"/><br/><br/>
+		            
+		            <label for="year" th:text="#{year}"></label><br/>
+		            <input type="text" id="year" name="year" th:value="${film.Year}" readonly="readonly"/><br/><br/>
+		           
+		            <label for="director" th:text="#{director}" ></label><br/>
+		            <input type="text" id="director" name="director" th:value="${film.Director}" readonly="readonly"/><br/><br/>
+		            
+		            <label for="plot" th:text="#{plot}"></label><br/>
+		            <input type="text" id="plot" name="plot" th:value="${film.Plot}" readonly="readonly"/><br/><br/>
+		            		      
+		            <label for="actors" th:text="#{actors}" ></label><br/>
+		            <input type="text" id="actors" name="actors" th:value="${film.Actors}" readonly="readonly"/><br/><br/>
+		            
+		            <label for="poster" th:text="#{poster}"></label><br/>
+		            <input type="text" id="poster" name="poster" th:value="${film.Poster}"/><br/><br/>
+		            
+		            <label for="trailer" th:text="#{trailer}" ></label><br/>
+		            <input type="text" id="trailer" name="trailer" th:value="${film.trailer}"/><br/><br/>
+		            
+		            <label for="ratings" th:text="#{ratings}"></label><br/>
+		            <input type="text" id="ratings" name="ratings" th:value="${film.Ratings}" readonly="readonly"/><br/><br/>
+		            		   
+		            <input type="checkbox" name="checkOn" checked="checked"/>
+		            <label for="irole" id="active" th:text="' ' + #{active}"></label>
+		            <label for="irole" id="inactive" th:text="' ' + #{inactive}"></label><br/><br/>
+		            <br/><br/>
+
+					<input type="submit" th:value="#{update}"></input>
+				 </div>	
+		    </form> 
+		</div>
+	</div>
+</body>
+</html>

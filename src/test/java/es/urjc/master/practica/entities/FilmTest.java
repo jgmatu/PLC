@@ -17,8 +17,8 @@ public class FilmTest {
 		ratings.add(new Rating("bla", "la"));
 		ratings.add(new Rating("test", "test"));
 		
-		filmA = new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings);
-		filmB = new Film("Hercules", "URL_VIDEO", "Her", "1999", "testDir", "testRep", "url_portada", ratings);
+		filmA = new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "www.yotube.com");
+		filmB = new Film("Hercules", "URL_VIDEO", "Her", "1999", "testDir", "testRep", "url_portada", ratings, "www.yotube.com");
 	}
 	
 	@Test
@@ -32,6 +32,7 @@ public class FilmTest {
 		filmB.setTitle(filmA.getTitle());
 		filmB.setYear(filmA.getYear());
 		filmB.setRatings(filmA.getRatings());
+		filmB.setTrailer(filmA.getTrailer());
 
 		assertEquals(filmA.getDirector(), filmB.getDirector());
 		assertEquals(filmA.getActors(), filmB.getActors());

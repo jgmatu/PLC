@@ -5,10 +5,9 @@
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <title th:text="#{storep}"></title>
 	  
-      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
-      <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="application/javascript"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="application/javascript"></script>  -->
+	  <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	  <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
+	  <script src="/js/login.js" type="text/javascript"></script>
 
    </head>
 	<body>
@@ -30,11 +29,11 @@
 			<div class="col-10">
 			  <h2 th:text="#{login}"></h2>
 			  
-			    <form id="formnuevo" role="form" th:action="@{/login}" method="post">
+			    <form id="formlogin" role="form" th:action="@{/login}" method="post">
 			        <div class="newpform">
 			            
 			            <label th:text="#{user}"></label><br/>
-			            <input type="text" id="user" name="username"/><br/><br/>
+			            <input type="text" id="username" name="username"/><br/><br/>
 			            <label th:text="#{pass}"></label><br/>
 			            <input type="password" id="password" name="password"/><br/><br/>
 						<input type="submit" id="login" th:value="#{login}"></input>

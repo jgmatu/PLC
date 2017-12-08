@@ -21,18 +21,55 @@
 		</div>					
 	</div>
 	<div class="rowP">
-		<div class="col-3 menu">
+		<div class="col-2 menu">
 			<ul>
-				<li><a href="/" th:text="#{home}"></a></li>
+				<li><a th:href="@{/home}" th:text="#{home}"></a></li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
 			</ul>
 		</div>
 		
-		<div class="col-9">
-			<h2 th:text="#{edituser}"></h2>
-				
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/3NwMrj0pBVs" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe> 
+		<div class="col-10">
+			<h2 th:text="${film.title}"></h2>
+			<div class="newpform" th:if="${not #lists.isEmpty(film)}">
+				        <table class="tablelist">
+				        	<tr id="trailertr">
+				        		<td colspan="3" id="trailertd">
+				        		<iframe id="trailerif" th:src="@{https://www.youtube.com/embed/} + ${film.trailer}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe> 
+				        		</td>
+				        	</tr>			        
+							<tr>
+								<th th:text="#{title}"></th>
+								<td><h6 th:text="${film.Title}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{year}"></th>
+								<td><h6 th:text="${film.Year}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{director}"></th>
+								<td><h6 th:text="${film.Director}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{plot}"></th>
+								<td><h6 th:text="${film.Plot}"></h6></td>		
+							</tr>
+							<tr>
+								<th th:text="#{actors}"></th>
+								<td><h6 th:text="${film.Actors}"></h6></td>
+							</tr>
+							<!-- <tr>
+								<td></td>
+								<td>Ratings</td>
+								<td></td>
+							</tr>
+							<tr th:each="rating : ${film.Ratings}">
+								<td></td>
+								<td><h6 th:text="${rating.Source}"></h6></td>
+								<td></td>
+							</tr>  -->
+						</table>
+					</div>
 		</div>
 	</div>
 </body>

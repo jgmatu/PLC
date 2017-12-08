@@ -5,6 +5,11 @@
 	  <link rel="stylesheet" href="/css/login.css" type="text/css"/>
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	  <title th:text="#{storep}"></title>
+	  	  
+	  <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	  <script src="/js/jquery.validate.min.js" type="text/javascript"></script>
+	  <script src="/js/login.js" type="text/javascript"></script>
+	  
    </head>
 	<body>
 	<div class="headerP">
@@ -29,26 +34,67 @@
 					<!-- <li><a href="/logout" th:text="#{singout}" ></a> </li>  -->
 				</ul>
 			</div>
-		<div class="col-9">
-					<h2 th:text="#{addfilm}"></h2>
-				
-				    <form id="formeditar" action="#" th:action="@{/management/films/create}" method="post">
-				    
-				        <div class="newpform">
-				        
-				            <label for="idname" th:text="#{title}"></label><br/>
+		<div class="col-10">
+					<h2 th:text="#{importFilm}"></h2>
+																	
+				    <form id="formeMfilm" action="#" th:action="@{/management/films}" method="post">
 				            <input type="text" id="title" name="title"/><br/><br/>
-				            
-				            <label for="iemail" th:text="#{url}"></label><br/>
-				            <input type="text" id="url" name="url"/><br/><br/>
-
-							<input type="submit" th:value="#{autoc}"></input>
-						 </div>	
-				    </form> 
+							<input type="submit" th:value="#{import}"></input>
+				    </form>
+				       <h2 th:text="#{film}" th:if="${not #lists.isEmpty(film)}"></h2>
+				       <div class="newpform" th:if="${not #lists.isEmpty(film)}">
+				        
+				        <table class="tablelist">
+							<tr>
+								<td rowspan="7" ><img id="imgPosterAdd" alt="Poster" th:src="${film.Poster}"/></td>
+							</tr>			        
+							<tr>
+								<th th:text="#{title}"></th>
+								<td><h6 th:text="${film.Title}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{year}"></th>
+								<td><h6 th:text="${film.Year}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{director}"></th>
+								<td><h6 th:text="${film.Director}"></h6></td>
+							</tr>
+							<tr>
+								<th th:text="#{plot}"></th>
+								<td><h6 th:text="${film.Plot}"></h6></td>		
+							</tr>
+							<tr>
+								<th th:text="#{actors}"></th>
+								<td><h6 th:text="${film.Actors}"></h6></td>
+							</tr>
+							<!-- <tr>
+								<td></td>
+								<td>Ratings</td>
+								<td></td>
+							</tr>
+							<tr th:each="rating : ${film.Ratings}">
+								<td></td>
+								<td><h6 th:text="${rating.Source}"></h6></td>
+								<td></td>
+							</tr>  -->
+							<tr>
+								<td><h6 th:text="${result}"></h6></td>
+								<td colspan="2">
+										&nbsp; &nbsp;
+										<a th:if="${result} == 'Film does not exist in the database'" th:href="${'/addfilm/' + film.Title}"><img id="imgDelEdit" alt="" th:src="@{/images/db.png}"/></a>
+										&nbsp; &nbsp;
+										<a href="/management/films"><img id="imgDelEdit" alt="" th:src="@{/images/cancel.png}"/></a>
+								</td>
+							</tr>
+						</table>
+					</div>
+					
 				</div>
 			</div>
 	</body>
 </html>
+
 
 
 
