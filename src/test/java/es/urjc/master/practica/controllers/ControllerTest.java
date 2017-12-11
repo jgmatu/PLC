@@ -215,5 +215,88 @@ public class ControllerTest {
 		    verify(usersDB, times(1)).save(userA);
 		    verify(usersDB, times(1)).delete(userA);
 	    }
+	    
+	    @Test
+	    public void searchOneTest() throws Exception {
+			when(filmsDB.findOne(any())).then(answer -> {
+				return filmA;
+			});	    	
+	 
+			mockMvc.perform(post("/home")	
+	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());	
+			
+		    verify(filmsDB, times(1)).findOne(any());	    	
+	    }
+
+	    @Test
+	    public void searchIGetTest() throws Exception {
+	    	when(filmsDB.findAll()).then(answer -> {
+		    	ArrayList<Film> films = new ArrayList<>();
+		    	
+	    		films.add(filmA);
+				return films;
+			});	    	
+	 
+			mockMvc.perform(get("/inactive/films")	
+	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());	
+		    verify(filmsDB, times(1)).findAll();	    	
+	    }
+	
+
+	    @Test
+	    public void searchIPostTest() throws Exception {
+			when(filmsDB.findOne(any())).then(answer -> {
+				return filmA;
+			});	    	
+	 
+			mockMvc.perform(post("/inactive/films")	
+	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());	  	
+	    }
+	    
+	    @Test
+	    public void updateUrlOneTest() throws Exception {
+			when(filmsDB.findOne(any())).then(answer -> {
+				return filmA;
+			});	    	
+	 
+			mockMvc.perform(post("/film/update")	
+		    		.content("urlt")
+					.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());		    	
+	    }
+
+	    @Test
+	    public void updateUrlAllTest() throws Exception {
+			when(filmsDB.findOne(any())).then(answer -> {
+				return filmA;
+			});	    	
+	 
+			mockMvc.perform(post("/film/update/all")	
+		    		.content("urlt")
+					.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());		    	
+	    }
+
+	    @Test
+	    public void editFilmTest() throws Exception {
+			when(filmsDB.findOne(any())).then(answer -> {
+				return filmA;
+			});	    	
+	 
+			mockMvc.perform(post("/edit/film/test")	
+		    		.content("urlt")
+					.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());		    	
+	    }
+
+	    @Test
+	    public void createUserTest() throws Exception {
+			mockMvc.perform(get("/create/user")	
+					.contentType(MediaType.MULTIPART_FORM_DATA))
+		    		.andExpect(status().isOk());
+	    }
 }
 	

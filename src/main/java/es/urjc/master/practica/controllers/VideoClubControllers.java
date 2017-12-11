@@ -40,13 +40,13 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping("/home")
 	public ModelAndView search() {
-		return new ModelAndView("films").addObject("films", filmsDB.findAll());
+		return new ModelAndView("films_page").addObject("films", filmsDB.findAll());
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ModelAndView searchOne(String title) {
-		return new ModelAndView("films").addObject("films", filmsDB.findOne(title));
+		return new ModelAndView("films_page").addObject("films", filmsDB.findOne(title));
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
@@ -96,6 +96,10 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/film/update", method = RequestMethod.POST)
 	public String updateUrl(Model model, String title, String urlt) {
+		if (urlt == null || title == null) {
+			return "url_film";
+		}
+		
 		Film film = filmsDB.findOne(title);
 		String[] splitUrl = urlt.split("=");
 
@@ -110,6 +114,10 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/film/update/all", method = RequestMethod.POST)
 	public String updateUrl(Model model, String title, boolean checkOn, String poster, String trailer) {
+		if (title == null || trailer == null || poster == null) {
+			return "url_film";
+		}
+		
 		Film film = filmsDB.findOne(title);
 		String[] splitUrl = trailer.split("=");
 
