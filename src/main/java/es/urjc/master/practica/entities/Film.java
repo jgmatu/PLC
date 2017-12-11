@@ -42,8 +42,9 @@ public class Film {
     private List<Rating> Ratings;
     
     private String trailer;
+    private String estado;
 
-	public Film(String Title, String video, String description, String year, String director, String reparto, String portada, ArrayList<Rating> Ratings, String trailer) {
+	public Film(String Title, String video, String description, String year, String director, String reparto, String portada, ArrayList<Rating> Ratings, String trailer, String estado) {
 		this.Title = Title;
 		this.Poster = portada;
 		this.Director = director;
@@ -52,6 +53,7 @@ public class Film {
 		this.Actors = reparto;
 		this.Ratings = Ratings;
 		this.trailer = trailer;
+		this.estado = estado;
 	}
 
 	public Film() {

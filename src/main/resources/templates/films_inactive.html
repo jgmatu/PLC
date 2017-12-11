@@ -31,7 +31,6 @@
 				<ul>
 					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
 					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
-					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/inactive/films" th:text="#{IFilms}" ></a> </li>
 				</ul>
 			</div>
 			<div class="col-10">
@@ -55,7 +54,7 @@
 							<th sec:authorize="hasRole('ROLE_ADMIN')"></th>
 							<th></th>
 						</tr>
-						 <tr th:each="film : ${films}" th:if="${film.estado} == 'A'">
+						 <tr th:each="film : ${films}" th:if="${film.estado} == 'I'">
 								<td><h6 th:text="${film.Title}"></h6></td>
 								<td><h6 th:text="${film.Year}"></h6></td>
 								<td><h6 th:text="${film.Director}"></h6></td>
@@ -76,32 +75,3 @@
 </html>
 
 
-
-
-
-
-
-
-
-						<!-- <tr>
-							<th> Name </th>
-							<th> Video </th>
-							<th> Description </th>
-							<th> Year </th>
-							<th> Director </th>
-							<th> Reparto </th>
-							<th> Portada</th>
-							<th> Value </th>
-						</tr>
-						    <tr th:each="film : ${films}">
-							<td th:text="${film.name}">This is a film</td>
-							<td><a th:href="'show?video=' + ${film.video}">Ver Pelicula</a></td>
-							<td th:text="${film.description}">This is a film</td>
-							<td th:text="${film.year}">This is a film</td>
-							<td th:text="${film.director}">This is a film</td>
-							<td th:text="${film.reparto}">This is a film</td>
-							<td th:text="${film.portada}">This is a film</td>
-							<td th:text="${film.value}">This is a film</td>
-						</tr> -->
-						
-						

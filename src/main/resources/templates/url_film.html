@@ -41,10 +41,10 @@
 		        <div class="newpform">
 		           
 		            <label for="name" th:text="#{title}" ></label><br/>
-		            <input type="text" id="name" name="title" th:value="${title}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="titletext" name="title" th:value="${title}" readonly="readonly"/><br/><br/>
 		            
-		            <label for="urlt" th:text="#{urlt}"></label><br/>
-		            <input type="text" id="url" name="urlt"/><br/><br/>
+		            <label for="urlt"  th:text="#{urlt}"></label><br/>
+		            <input type="text" id="urltext" name="urlt"/><br/><br/>
 
 					<input type="submit" th:value="#{save}"></input>
 				 </div>	
@@ -63,7 +63,7 @@
 		    		</td>
 		    		<td>
 		    			<h2 th:text="#{step2}"></h2>
-		    			<h2 th:text="#{step1message}"></h2>
+		    			<h2 th:text="#{step2message}"></h2>
 		    			<img alt="" th:src="@{/images/pasteurl.jpg}"/>
 		    		</td>
 		    	</tr>

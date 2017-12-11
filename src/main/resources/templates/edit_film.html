@@ -37,36 +37,36 @@
 		<div class="col-10">
 			<h2 th:text="#{editfilm}"></h2>
 				
-		    <form id="formEdituser" th:action="@{/film/update/all}" method="post">
+		    <form id="formEditfilmall" th:action="@{/film/update/all}" method="post">
 		        <div class="newpform">
 		           
 		            <label for="title" th:text="#{title}" ></label><br/>
-		            <input type="text" id="title" name="title" th:value="${film.Title}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="titletext" name="title" th:value="${film.Title}" readonly="readonly"/><br/><br/>
 		            
 		            <label for="year" th:text="#{year}"></label><br/>
-		            <input type="text" id="year" name="year" th:value="${film.Year}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="titletext" name="year" th:value="${film.Year}" readonly="readonly"/><br/><br/>
 		           
 		            <label for="director" th:text="#{director}" ></label><br/>
-		            <input type="text" id="director" name="director" th:value="${film.Director}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="titletext" name="director" th:value="${film.Director}" readonly="readonly"/><br/><br/>
 		            
 		            <label for="plot" th:text="#{plot}"></label><br/>
-		            <input type="text" id="plot" name="plot" th:value="${film.Plot}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="urltext" name="plot" th:value="${film.Plot}" readonly="readonly"/><br/><br/>
 		            		      
 		            <label for="actors" th:text="#{actors}" ></label><br/>
-		            <input type="text" id="actors" name="actors" th:value="${film.Actors}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="urltext" name="actors" th:value="${film.Actors}" readonly="readonly"/><br/><br/>
 		            
 		            <label for="poster" th:text="#{poster}"></label><br/>
-		            <input type="text" id="poster" name="poster" th:value="${film.Poster}"/><br/><br/>
+		            <input type="text" id="urltext" name="poster" th:value="${film.Poster}"/><br/><br/>
 		            
 		            <label for="trailer" th:text="#{trailer}" ></label><br/>
-		            <input type="text" id="trailer" name="trailer" th:value="${film.trailer}"/><br/><br/>
+		            <input type="text" id="urltext" name="trailer" th:value="${'https://www.youtube.com/watch?v=' + film.trailer}"/><br/><br/>
 		            
 		            <label for="ratings" th:text="#{ratings}"></label><br/>
-		            <input type="text" id="ratings" name="ratings" th:value="${film.Ratings}" readonly="readonly"/><br/><br/>
+		            <input type="text" id="urltext" name="ratings" th:value="${film.Ratings}" readonly="readonly"/><br/><br/>
 		            		   
 		            <input type="checkbox" name="checkOn" checked="checked"/>
-		            <label for="irole" id="active" th:text="' ' + #{active}"></label>
-		            <label for="irole" id="inactive" th:text="' ' + #{inactive}"></label><br/><br/>
+		            
+		            <label for="irole" id="inactive" th:text="' ' + #{msjactive}"></label><br/><br/>
 		            <br/><br/>
 
 					<input type="submit" th:value="#{update}"></input>

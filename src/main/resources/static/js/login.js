@@ -1,5 +1,8 @@
 $(document).ready(function() {
     
+	
+
+	
 
     $("#formlogin").validate({
         rules: {
@@ -91,5 +94,37 @@ $(document).ready(function() {
        },
        
    });
+   
+   
+   $("#formEditfilmall").validate({
+       rules: {
+           poster: { required: true, url: true},
+           trailer: { required: true, url: true},
+           
+       },
+       messages: {
+    	   poster: "Debe introducir un url para el poster.",
+    	   trailer: "Debe introducir un url para el trailer.",
+           //message : "El campo Mensaje es obligatorio.",
+       },
+       
+   });
+   /*$("#active").show();
+   $("#inactive").hide();
+   
+   function validate(){
+	    
+	    if (document.getElementById("checkOn").checked){
+	    	$("#active").show();
+	    	//$("#inactive").hide();
+	    	return false;
+	    }else{
+	    	$("#active").hide();
+	    	$("#inactive").show();
+	    	return false;
+	    }
+	}*/
+   
+
     
 });

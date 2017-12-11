@@ -122,6 +122,7 @@ span{
     background-color: #f2f2f2;
     padding: 20px;
 }
+
 .tablelist {
 	border-collapse: collapse;
 	border: #c0c0c0 2px solid;
@@ -137,6 +138,12 @@ th {
     color: white;
     text-align: center;
     padding: 8px;
+}
+#urltext{
+	width : 40%;
+}
+#titletext{
+	width : 20%;
 }
 #trailertr{
 	background-color:#000000;

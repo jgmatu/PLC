@@ -17,8 +17,8 @@ public class FilmTest {
 		ratings.add(new Rating("bla", "la"));
 		ratings.add(new Rating("test", "test"));
 		
-		filmA = new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "www.yotube.com");
-		filmB = new Film("Hercules", "URL_VIDEO", "Her", "1999", "testDir", "testRep", "url_portada", ratings, "www.yotube.com");
+		filmA = new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "www.yotube.com", "A");
+		filmB = new Film("Hercules", "URL_VIDEO", "Her", "1999", "testDir", "testRep", "url_portada", ratings, "www.yotube.com", "I");
 	}
 	
 	@Test

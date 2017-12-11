@@ -53,6 +53,6 @@ public class FilmsRestServiceTest {
 		ratings.add(new Rating("bla", "la"));
 		ratings.add(new Rating("test", "test"));
 
-		return new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "URL_TRAILER");
+		return new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "URL_TRAILER", "A");
 	}
 }

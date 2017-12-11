@@ -55,6 +55,20 @@ public class VideoClubControllers {
 		filmOne.add(filmsDB.findOne(title));
 		return new ModelAndView("films").addObject("films", filmOne);
 	}
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@RequestMapping("/inactive/films")
+	public ModelAndView searchI() {
+		return new ModelAndView("films_inactive").addObject("films", filmsDB.findAll());
+	}
+	
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@RequestMapping(value = "/inactive/films", method = RequestMethod.POST)
+	public ModelAndView searchOneI(String title) {
+		List<Film> filmOne = new ArrayList<Film>();
+		filmOne.add(filmsDB.findOne(title));
+		return new ModelAndView("films_inactive").addObject("films", filmOne);
+	}
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("management/films")
@@ -77,25 +91,12 @@ public class VideoClubControllers {
 				.addObject("film", film);
 	}
 
-	/*@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "management/films/create", method = RequestMethod.POST)
-	public ModelAndView managementFilmsCreate(String title, String url) {
-		if (filmsDB.exists(title)) {
-			return new ModelAndView("management_create")
-					.addObject("result", "inDB")
-					.addObject("film", filmsDB.findOne(title));
-		}	
-		Film film = filmsService.getFilm(title);
-		return new ModelAndView("management_create")
-				.addObject("result", "outDB")
-				.addObject("film", film);
-	}*/	
-
 
 	@Secured({"ROLE_ADMIN"})
     @RequestMapping("/addfilm/{Title}")
     public ModelAndView saveFilm(@PathVariable String Title){
 			Film film = filmsService.getFilm(Title);
+			film.setEstado("A");
 			filmsDB.save(film);
 			return new ModelAndView("url_film")
 					.addObject("title", Title);	
@@ -110,31 +111,31 @@ public class VideoClubControllers {
 		String part1 = partes[0]; 
 		String part2 = partes[1]; 
 		film.setTrailer(part2);
+		
 		filmsDB.save(film);
 		model.addAttribute("message", "Saved film");
         return "success";
 	}
 	
-	/*@Secured({"ROLE_ADMIN"})
+	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/film/update/all", method = RequestMethod.POST)
-	public String updateUrl(Model model, String title, String urlt) {
+	public String updateUrl(Model model, String title, boolean checkOn, String poster, String trailer) {
 		Film film = filmsDB.findOne(title);
 		filmsDB.delete(film);
-		String[] partes = urlt.split("=");
+		String[] partes = trailer.split("=");
 		String part1 = partes[0]; 
 		String part2 = partes[1]; 
 		film.setTrailer(part2);
+		film.setPoster(poster);
+		if(checkOn) {
+			film.setEstado("A");
+		}else {
+			film.setEstado("I");
+		}
 		filmsDB.save(film);
 		model.addAttribute("message", "Saved film");
         return "success";
-	}*/
-	
-	
-	
-	
-	
-	
-	
+	}
 
 	
 	@Secured({"ROLE_ADMIN"})
