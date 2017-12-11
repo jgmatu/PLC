@@ -223,6 +223,7 @@ public class VideoClubControllers {
 		film.setPoster(poster);
 		if(isActive) {
 			film.setEstado("A");
+			
 		}else {
 			film.setEstado("I");
 		}
