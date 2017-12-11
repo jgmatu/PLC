@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
@@ -28,6 +29,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.urjc.master.practica.customers.FilmsRepository;
 import es.urjc.master.practica.customers.UserRepository;
+import es.urjc.master.practica.entities.Film;
+import es.urjc.master.practica.entities.Rating;
 import es.urjc.master.practica.entities.User;
 import es.urjc.master.practica.services.FilmsRestService;
 
@@ -50,6 +53,7 @@ public class ControllerTest {
 	    private MockMvc mockMvc;
 	    
 	    private User userA;
+	    private Film filmA;
 	    private ObjectMapper obj;
 	    
 	    @Before
@@ -57,8 +61,12 @@ public class ControllerTest {
 	    	videoClubController = new VideoClubControllers();			
 			mockMvc = MockMvcBuilders.standaloneSetup(videoClubController).build();
 			
-			GrantedAuthority[] userRoles = { new SimpleGrantedAuthority("ROLE_USER") };
-			
+			ArrayList<Rating> ratings = new ArrayList<Rating>();
+			ratings.add(new Rating("bla", "la"));
+			ratings.add(new Rating("test", "test"));
+			filmA = new Film("Gladiator", "URL_VIDEO", "Gla", "2000", "testDir", "testRep", "url_portada", ratings, "www.yotube.com", "A");
+
+			GrantedAuthority[] userRoles = { new SimpleGrantedAuthority("ROLE_USER") };	
 			userA = new User("Test", "Test", "Test", Arrays.asList(userRoles));
 			obj = new ObjectMapper();
 			
@@ -88,7 +96,7 @@ public class ControllerTest {
 
 	    @Test
 	    public void testShow() throws Exception {
-	    	mockMvc.perform(post("/show?video='test'")
+	    	mockMvc.perform(post("/view/film/test")
 		    		.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	    	
 	    }
@@ -101,35 +109,33 @@ public class ControllerTest {
 	    }
 
 	    @Test
-	    public void testManagementFilmsGetCreate() throws Exception {
-	    	mockMvc.perform(get("/management/films/create")
-		    		.contentType(MediaType.TEXT_HTML))
-		    		.andExpect(status().isMethodNotAllowed());	    	
-	    }
-
-	    @Test
 	    public void testManagementFilmsPostCreate() throws Exception {
-			when(filmsDB.exists(any())).then(answer ->{
+			when(filmsDB.exists(any())).then(answer -> {
 				return false;
 			});	    	
 	    	
-			mockMvc.perform(post("/management/films/create")
-		    		.contentType(MediaType.TEXT_HTML))
+			mockMvc.perform(post("/management/films")
+		    		.content(obj.writeValueAsString(filmA))
+					.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	    	
-
-			when(filmsDB.exists(any())).then(answer ->{
+			
+			when(filmsDB.exists(any())).then(answer -> {
 				return true;
 			});	    	
 			
-	    	mockMvc.perform(post("/management/films/create")
-		    		.content(obj.writeValueAsString(userA))
+	    	mockMvc.perform(post("/management/films")
+		    		.content(obj.writeValueAsString(filmA))
 	    			.contentType(MediaType.TEXT_HTML))
 			    	.andExpect(status().isOk());	    	
 		}
 
 	    @Test
 	    public void testAddfilm() throws Exception {	    	
-	    	mockMvc.perform(get("/addfilm/Test")
+			when(filmsService.getFilm(any())).then(answer ->{
+				return filmA;
+			});	    	
+
+	    	mockMvc.perform(get("/addfilm/test")
 		    		.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	    	
 	    }

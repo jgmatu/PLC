@@ -1,9 +1,5 @@
 $(document).ready(function() {
-    
-	
-
-	
-
+    	
     $("#formlogin").validate({
         rules: {
             username: { required: true, minlength: 2},
@@ -45,18 +41,26 @@ $(document).ready(function() {
    });
     
    
+   
    $("#formEditfilm").validate({
        rules: {
-           urlt: { required: true, url: true},
+           urlt: { required: true, url: true,  regex: "^[^=]*=[^=]*$"},
        },
        messages: {
-    	   urlt: "Debe introducir un url.",
+    	   urlt: "Debe introducir un url valida siga el ejemplo...",
            //message : "El campo Mensaje es obligatorio.",
        },
-       
    });
-   
-   
+  
+   $.validator.addMethod(
+	        "regex",
+	        function(value, element, regexp) {
+	            var re = new RegExp(regexp);
+	            
+	            return this.optional(element) || re.test(value);
+	        },
+	        "Please check your input."
+   );
    
    $("#formEdituser").validate({
        rules: {
@@ -70,9 +74,7 @@ $(document).ready(function() {
        },
        
    });
-   
-   
-   
+      
    $("#formMuser").validate({
        rules: {
            user: { required: true, minlength: 1},
@@ -99,8 +101,7 @@ $(document).ready(function() {
    $("#formEditfilmall").validate({
        rules: {
            poster: { required: true, url: true},
-           trailer: { required: true, url: true},
-           
+           trailer: { required: true, url: true},        
        },
        messages: {
     	   poster: "Debe introducir un url para el poster.",
@@ -109,6 +110,7 @@ $(document).ready(function() {
        },
        
    });
+   
    /*$("#active").show();
    $("#inactive").hide();
    

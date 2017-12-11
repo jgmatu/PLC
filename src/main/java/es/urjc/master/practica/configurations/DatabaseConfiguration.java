@@ -19,12 +19,11 @@ public class DatabaseConfiguration {
 	
 	@PostConstruct
 	private void initDatabase() {		
-		// Create admin user
-		System.out.println("Initialize user db...");
+		System.out.println("Initialize users db...");
 		
 		GrantedAuthority[] adminRoles = { new SimpleGrantedAuthority("ROLE_ADMIN") };
 		GrantedAuthority[] userRoles = { new SimpleGrantedAuthority("ROLE_USER") };
 		userRepository.save(new User("root", "root@gmail.com" , "root1", Arrays.asList(adminRoles)));
-		userRepository.save(new User("user", "javi@gmail.com","user1", Arrays.asList(userRoles)));
+		userRepository.save(new User("user", "user@gmail.com","user1", Arrays.asList(userRoles)));
 	}
 }

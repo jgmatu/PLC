@@ -35,7 +35,7 @@
 				        <table class="tablelist">
 				        	<tr id="trailertr">
 				        		<td colspan="3" id="trailertd">
-				        		<iframe id="trailerif" th:src="@{https://www.youtube.com/embed/} + ${film.trailer}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe> 
+				        		<iframe id="trailerif" th:src="@{'https://www.youtube.com/embed/' + ${film.trailer}}" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen="allowfullscreen"></iframe> 
 				        		</td>
 				        	</tr>			        
 							<tr>

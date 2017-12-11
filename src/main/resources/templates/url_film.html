@@ -39,17 +39,13 @@
 				
 		    <form id="formEditfilm" th:action="@{/film/update}" method="post">
 		        <div class="newpform">
-		           
 		            <label for="name" th:text="#{title}" ></label><br/>
 		            <input type="text" id="titletext" name="title" th:value="${title}" readonly="readonly"/><br/><br/>
-		            
 		            <label for="urlt"  th:text="#{urlt}"></label><br/>
 		            <input type="text" id="urltext" name="urlt"/><br/><br/>
-
 					<input type="submit" th:value="#{save}"></input>
 				 </div>	
-		    </form> 
-		    
+		    </form> 		    
 		    <table>
 		    	<tr>
 		    		<td>

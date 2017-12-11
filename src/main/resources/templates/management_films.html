@@ -12,26 +12,24 @@
 	  
    </head>
 	<body>
-	<div class="headerP">
-		<h1 th:text="#{storep}"></h1>	
-		<div class="lan">	
-			<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
-			<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
-		</div>
-		<div class="Hi">	
-			<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
-			<form th:action="@{/logout}" method="post">
-				<input id="btsingout" type="submit" th:value="#{singout}"/>
-			</form> 	  			
-		</div>					
-	</div>
-	
+		<div class="headerP">
+			<h1 th:text="#{storep}"></h1>	
+			<div class="lan">	
+				<a href="?lang=es"><img class="iconolan" alt="" th:src="@{/images/es.png}"/></a>
+				<a href="?lang=en"><img class="iconolan" alt="" th:src="@{/images/en.png}"/></a>  			
+			</div>
+			<div class="Hi">	
+				<span th:text="#{hi} + ', '"></span><span sec:authentication="name"></span>
+				<form th:action="@{/logout}" method="post">
+					<input id="btsingout" type="submit" th:value="#{singout}"/>
+				</form> 	  			
+			</div>					
+		</div>	
 		<div class="rowP">
 			<div class="col-2 menu">
 				<ul>
 					<li><a th:href="@{/home}" th:text="#{home}"></a></li>
 					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
-					<!-- <li><a href="/logout" th:text="#{singout}" ></a> </li>  -->
 				</ul>
 			</div>
 		<div class="col-10">
@@ -68,16 +66,6 @@
 								<th th:text="#{actors}"></th>
 								<td><h6 th:text="${film.Actors}"></h6></td>
 							</tr>
-							<!-- <tr>
-								<td></td>
-								<td>Ratings</td>
-								<td></td>
-							</tr>
-							<tr th:each="rating : ${film.Ratings}">
-								<td></td>
-								<td><h6 th:text="${rating.Source}"></h6></td>
-								<td></td>
-							</tr>  -->
 							<tr>
 								<td><h6 th:text="${result}"></h6></td>
 								<td colspan="2">
@@ -88,8 +76,7 @@
 								</td>
 							</tr>
 						</table>
-					</div>
-					
+					</div>					
 				</div>
 			</div>
 	</body>
