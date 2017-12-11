@@ -331,7 +331,7 @@ public class ControllerTest {
  		                    new BasicNameValuePair("title", "Test"),
  		                    new BasicNameValuePair("trailer", "Test=BlaIdTest"),
  		                    new BasicNameValuePair("poster", "Test"),
- 		                    new BasicNameValuePair("chec0kOn", "true")
+ 		                    new BasicNameValuePair("checkOn", "true")
  		             )))))
 		    		.andExpect(status().isOk());		    	
 	    }

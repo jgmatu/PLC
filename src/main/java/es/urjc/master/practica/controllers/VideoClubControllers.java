@@ -18,6 +18,18 @@ import es.urjc.master.practica.services.FilmsRestService;
 @Controller
 public class VideoClubControllers {
 	
+	private static final String USER = "user";
+	private static final String USERS = "users";
+
+	private static final String FILM = "film";
+	private static final String FILMS = "films";
+	private static final String RESULT = "result";
+	
+	
+	private static final String VIEW_FILMS_PAGE = "films_page";
+	private static final String VIEW_FILMS_INACTIVE = "films_inactive";
+	
+	
 	@Autowired 
 	private FilmsRepository filmsDB; 
 
@@ -40,25 +52,25 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping("/home")
 	public ModelAndView search() {
-		return new ModelAndView("films_page").addObject("films", filmsDB.findAll());
+		return new ModelAndView(VIEW_FILMS_PAGE).addObject(FILMS, filmsDB.findAll());
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public ModelAndView searchOne(String title) {
-		return new ModelAndView("films_page").addObject("films", filmsDB.findOne(title));
+		return new ModelAndView(VIEW_FILMS_PAGE).addObject(FILMS, filmsDB.findOne(title));
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping("/inactive/films")
 	public ModelAndView searchI() {
-		return new ModelAndView("films_inactive").addObject("films", filmsDB.findAll());
+		return new ModelAndView(VIEW_FILMS_INACTIVE).addObject(FILMS, filmsDB.findAll());
 	}
 	
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@RequestMapping(value = "/inactive/films", method = RequestMethod.POST)
 	public ModelAndView searchOneI(String title) {
-		return new ModelAndView("films_inactive").addObject("films", filmsDB.findOne(title));
+		return new ModelAndView(VIEW_FILMS_INACTIVE).addObject(FILMS, filmsDB.findOne(title));
 	}
 
 	@Secured("ROLE_ADMIN")
@@ -72,14 +84,14 @@ public class VideoClubControllers {
 	public ModelAndView managementFilmsCreate(String title) {
 		if (filmsDB.exists(title)) {
 			return new ModelAndView("management_films")
-					.addObject("result", "\r\n" + "Film exists in the database")
-					.addObject("film", filmsDB.findOne(title));
+					.addObject(RESULT, "\r\n" + "Film exists in the database")
+					.addObject(FILM, filmsDB.findOne(title));
 		}
 		
 		Film film = filmsService.getFilm(title);
 		return new ModelAndView("management_films")
 				.addObject("result", "Film does not exist in the database")
-				.addObject("film", film);
+				.addObject(FILM, film);
 	}
 
 	@Secured({"ROLE_ADMIN"})
@@ -137,7 +149,7 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
     @RequestMapping("/edit/film/{title}")
 	public ModelAndView editFilm(@PathVariable String title){
-		return new ModelAndView("edit_film").addObject("film", filmsDB.findOne(title));
+		return new ModelAndView("edit_film").addObject(FILM, filmsDB.findOne(title));
     }
 	
 
@@ -157,13 +169,13 @@ public class VideoClubControllers {
 	@RequestMapping(value = "/management/users")
 	public ModelAndView managementUsers() {
 		return new ModelAndView("management_users")
-				.addObject("users", new Film()).addObject("users", usersDB.findAll());
+				.addObject(USERS, usersDB.findAll());
 	}
 
 	@Secured({"ROLE_ADMIN"})
     @RequestMapping(value = "/management/users", method = RequestMethod.POST)
 	public ModelAndView listOneuser(String user){
-		return new ModelAndView("management_users").addObject("users", usersDB.findOne(user));
+		return new ModelAndView("management_users").addObject(USERS, usersDB.findOne(user));
     }	
 
 	@Secured({"ROLE_ADMIN"})
@@ -176,7 +188,7 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping("/user/admin/{name}")
 	public String userAdmin(@PathVariable String name, Model model) {	
-		model.addAttribute("user", usersDB.findOne(name));
+		model.addAttribute(USER, usersDB.findOne(name));
 		return "edit_user";
 	}
 
@@ -186,7 +198,7 @@ public class VideoClubControllers {
 		usersDB.delete(usersDB.findOne(name));
 		usersDB.save(getUpdateUser(name, email, checkadmin));
 
-		model.addAttribute("users", usersDB.findAll());
+		model.addAttribute(USERS, usersDB.findAll());
         return "management_users";
 	}
 	
