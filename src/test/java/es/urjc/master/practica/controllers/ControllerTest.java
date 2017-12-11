@@ -11,6 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -205,15 +208,32 @@ public class ControllerTest {
 	    
 	    @Test
 	    public void managementUserPostUpdate() throws Exception {   	
+
 	    	when(usersDB.findOne(any())).then(answer ->{
 				return userA;
 			});	    	
-	    	
 	    	mockMvc.perform(post("/user/update")	
-	    			.contentType(MediaType.MULTIPART_FORM_DATA))
-		    		.andExpect(status().isOk());	    		    		    	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("user", "Test"),
+ 		                    new BasicNameValuePair("email", "Test"),
+ 		                    new BasicNameValuePair("checkadmin", "true")
+  		             )))))
+	    			.andExpect(status().isOk());	
+	    	
 		    verify(usersDB, times(1)).save(userA);
 		    verify(usersDB, times(1)).delete(userA);
+		    
+	    	mockMvc.perform(post("/user/update")	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("user", "Test"),
+ 		                    new BasicNameValuePair("email", "Test"),
+ 		                    new BasicNameValuePair("checkadmin", "false")
+  		             )))))
+	    			.andExpect(status().isOk());	
+		    verify(usersDB, times(2)).save(userA);
+		    verify(usersDB, times(2)).delete(userA);
 	    }
 	    
 	    @Test
@@ -223,7 +243,7 @@ public class ControllerTest {
 			});	    	
 	 
 			mockMvc.perform(post("/home")	
-	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+	    			.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	
 			
 		    verify(filmsDB, times(1)).findOne(any());	    	
@@ -239,7 +259,7 @@ public class ControllerTest {
 			});	    	
 	 
 			mockMvc.perform(get("/inactive/films")	
-	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+	    			.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	
 		    verify(filmsDB, times(1)).findAll();	    	
 	    }
@@ -252,7 +272,7 @@ public class ControllerTest {
 			});	    	
 	 
 			mockMvc.perform(post("/inactive/films")	
-	    			.contentType(MediaType.MULTIPART_FORM_DATA))
+	    			.contentType(MediaType.TEXT_HTML))
 		    		.andExpect(status().isOk());	  	
 	    }
 	    
@@ -263,8 +283,19 @@ public class ControllerTest {
 			});	    	
 	 
 			mockMvc.perform(post("/film/update")	
-		    		.content("urlt")
-					.contentType(MediaType.MULTIPART_FORM_DATA))
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("title", "Test"),
+ 		                    new BasicNameValuePair("urlt", "Test")
+ 		             )))))
+		    		.andExpect(status().isOk());		    	
+	 
+			mockMvc.perform(post("/film/update")	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("title", "Test"),
+ 		                    new BasicNameValuePair("urlt", "urlBla=idVideoTest")
+ 		             )))))
 		    		.andExpect(status().isOk());		    	
 	    }
 
@@ -275,8 +306,33 @@ public class ControllerTest {
 			});	    	
 	 
 			mockMvc.perform(post("/film/update/all")	
-		    		.content("urlt")
-					.contentType(MediaType.MULTIPART_FORM_DATA))
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("title", "Test"),
+ 		                    new BasicNameValuePair("trailer", "Test"),
+ 		                    new BasicNameValuePair("poster", "Test"),
+ 		                    new BasicNameValuePair("checkOn", "true")
+ 		             )))))
+		    		.andExpect(status().isOk());		    	
+	 
+			mockMvc.perform(post("/film/update/all")	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("title", "Test"),
+ 		                    new BasicNameValuePair("trailer", "Test=BlaIdTest"),
+ 		                    new BasicNameValuePair("poster", "Test"),
+ 		                    new BasicNameValuePair("checkOn", "false")
+ 		             )))))
+		    		.andExpect(status().isOk());		    	
+			
+			mockMvc.perform(post("/film/update/all")	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("title", "Test"),
+ 		                    new BasicNameValuePair("trailer", "Test=BlaIdTest"),
+ 		                    new BasicNameValuePair("poster", "Test"),
+ 		                    new BasicNameValuePair("chec0kOn", "true")
+ 		             )))))
 		    		.andExpect(status().isOk());		    	
 	    }
 
@@ -286,11 +342,10 @@ public class ControllerTest {
 				return filmA;
 			});	    	
 	 
-			mockMvc.perform(post("/edit/film/test")	
-		    		.content("urlt")
-					.contentType(MediaType.MULTIPART_FORM_DATA))
-		    		.andExpect(status().isOk());		    	
-	    }
+			mockMvc.perform(get("/edit/film/test")	
+					.contentType(MediaType.TEXT_HTML))
+					.andExpect(status().isOk());		    	
+			}
 
 	    @Test
 	    public void createUserTest() throws Exception {
@@ -298,5 +353,20 @@ public class ControllerTest {
 					.contentType(MediaType.MULTIPART_FORM_DATA))
 		    		.andExpect(status().isOk());
 	    }
+	    
+	    @Test
+	    public void listOneUser() throws Exception {
+			when(usersDB.findOne(any())).then(answer -> {
+				return userA;
+			});	    	
+	 
+	    	mockMvc.perform(post("/management/users")	
+					.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    				.content(EntityUtils.toString(new UrlEncodedFormEntity(Arrays.asList(
+ 		                    new BasicNameValuePair("user", "test")
+ 		             )))))
+	    			.andExpect(status().isOk());
+	    }
+
 }
 	

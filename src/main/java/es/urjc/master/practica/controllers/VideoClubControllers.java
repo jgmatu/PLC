@@ -95,11 +95,7 @@ public class VideoClubControllers {
 	
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/film/update", method = RequestMethod.POST)
-	public String updateUrl(Model model, String title, String urlt) {
-		if (urlt == null || title == null) {
-			return "url_film";
-		}
-		
+	public String updateUrl(Model model, String title, String urlt) {		
 		Film film = filmsDB.findOne(title);
 		String[] splitUrl = urlt.split("=");
 
@@ -113,11 +109,7 @@ public class VideoClubControllers {
 	
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/film/update/all", method = RequestMethod.POST)
-	public String updateUrl(Model model, String title, boolean checkOn, String poster, String trailer) {
-		if (title == null || trailer == null || poster == null) {
-			return "url_film";
-		}
-		
+	public String updateUrl(Model model, String title, boolean checkOn, String poster, String trailer) {		
 		Film film = filmsDB.findOne(title);
 		String[] splitUrl = trailer.split("=");
 
