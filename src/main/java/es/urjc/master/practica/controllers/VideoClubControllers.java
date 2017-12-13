@@ -84,13 +84,13 @@ public class VideoClubControllers {
 	public ModelAndView managementFilmsCreate(String title) {
 		if (filmsDB.exists(title)) {
 			return new ModelAndView("management_films")
-					.addObject(RESULT, "\r\n" + "Film exists in the database")
+					.addObject(RESULT, "Film exists in the database")
 					.addObject(FILM, filmsDB.findOne(title));
 		}
 		
 		Film film = filmsService.getFilm(title);
 		return new ModelAndView("management_films")
-				.addObject("result", "Film does not exist in the database")
+				.addObject(RESULT, "Film does not exist in the database")
 				.addObject(FILM, film);
 	}
 
@@ -195,8 +195,9 @@ public class VideoClubControllers {
 	@Secured({"ROLE_ADMIN"})
 	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateAdmin(Model model, String name, String email, boolean checkadmin) {
+		User userCache = getUpdateUser(name, email, checkadmin);
 		usersDB.delete(usersDB.findOne(name));
-		usersDB.save(getUpdateUser(name, email, checkadmin));
+		usersDB.save(userCache);
 
 		model.addAttribute(USERS, usersDB.findAll());
         return "management_users";

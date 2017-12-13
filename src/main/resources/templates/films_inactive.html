@@ -29,6 +29,7 @@
 		<div class="rowP">
 			<div class="col-2 menu">
 				<ul>
+					<li><a th:href="@{/home}" th:text="#{home}"></a></li>
 					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/users" th:text="#{MUsers}"></a> </li>
 					<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/management/films" th:text="#{MFilms}" ></a> </li>
 				</ul>

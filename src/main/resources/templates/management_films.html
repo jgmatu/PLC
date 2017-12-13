@@ -67,7 +67,12 @@
 								<td><h6 th:text="${film.Actors}"></h6></td>
 							</tr>
 							<tr>
-								<td><h6 th:text="${result}"></h6></td>
+								<!-- <td><h6 th:text="${result}"></h6></td>  -->
+								<td>
+									<h6 th:if="${result} == 'Film does not exist in the database'" th:text="#{resultNodb}"></h6>
+									<h6 th:if="${result} == 'Film exists in the database'" th:text="#{resultDb}"></h6>
+								</td>
+								
 								<td colspan="2">
 										&nbsp; &nbsp;
 										<a th:if="${result} == 'Film does not exist in the database'" th:href="${'/addfilm/' + film.Title}"><img id="imgDelEdit" alt="" th:src="@{/images/db.png}"/></a>

@@ -131,6 +131,10 @@ span{
 
 td {
     text-align: left;
+    padding: 8px;  
+}
+#tdUser {
+    text-align: center;
     padding: 8px;
 }
 th {
@@ -179,5 +183,8 @@ tr:nth-child(even){
 	color:red;
 }
 #url-error{
+	color:red;
+}
+#urltext-error{
 	color:red;
 }

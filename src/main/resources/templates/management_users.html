@@ -52,17 +52,17 @@
 			                <th></th> 			               
 			            </tr>
 			            <tr th:each="user : ${users}">
-			                <td th:text="${user.name}"></td>
-			                <td th:text="${user.email}"></td>
+			                <td id="tdUser" th:text="${user.name}"></td>
+			                <td id="tdUser" th:text="${user.email}"></td>
 			                
-			                <td th:text="${user.roles}"></td>
+			                <td id="tdUser" th:text="${user.roles}"></td>
 			                <!--<td>
 							  <span th:if="${user.roles} == '[ROLE_ADMIN]'">ADMIN</span>
 							  <span th:if="${user.roles} == '[ROLE_USER]'">USER</span>
 			                </td> -->
 
-			                <td sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtRol" th:href="${'/user/admin/' + user.name}"><img id="imgDelEdit" alt="" th:src="@{/images/edit.png}"/></a></td>
-			                <td sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtDelete" th:href="${'/delete/user/' + user.name}"><img id="imgDelEdit" alt="" th:src="@{/images/delete.png}"/></a></td>  
+			                <td id="tdUser" sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtRol" th:href="${'/user/admin/' + user.name}"><img id="imgDelEdit" alt="" th:src="@{/images/edit.png}"/></a></td>
+			                <td id="tdUser" sec:authorize="hasRole('ROLE_ADMIN')"><a id="txtDelete" th:href="${'/delete/user/' + user.name}"><img id="imgDelEdit" alt="" th:src="@{/images/delete.png}"/></a></td>  
 			            </tr>
 			        </table>
 			    </div> 

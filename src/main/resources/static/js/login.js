@@ -47,7 +47,7 @@ $(document).ready(function() {
            urlt: { required: true, url: true,  regex: "^[^=]*=[^=]*$"},
        },
        messages: {
-    	   urlt: "Debe introducir un url valida siga el ejemplo...",
+    	   urlt: "Debe introducir un url valida siga los pasos...",
            //message : "El campo Mensaje es obligatorio.",
        },
    });
